@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found | Ram Saran Yadav</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {                     colors: {
+                        primary: '#FF7A00', // Neon Orange
+                        secondary: '#FF7A00', // Neon Orange
+                        background: '#0a0a0a', // Deep Black
+                        surface: '#171717', // Dark Grey
+                        'on-surface': '#ffffff',
+                        'on-surface-variant': '#9ca3af'
+                    }, fontFamily: { heading: ['Montserrat', 'sans-serif'], body: ['Inter', 'sans-serif'] } } }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-secondary selection:text-background h-screen flex flex-col">
+    <div data-component="Navbar"></div>
+
+    <main class="flex-1 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="text-center relative z-10 px-6">
+            <h1 class="font-heading text-9xl font-bold text-white mb-4">404</h1>
+            <h2 class="font-heading text-2xl font-bold text-secondary mb-4 uppercase tracking-widest">Page Not Found</h2>
+            <p class="font-body text-on-surface-variant mb-8 max-w-md mx-auto">
+                The page you are looking for doesn't exist or has been moved.
+            </p>
+            <a href="index.html" class="inline-block bg-white text-background px-8 py-3 rounded-xl font-heading font-bold hover:bg-secondary transition-colors">
+                Return to Homepage
+            </a>
+        </div>
+    </main>
+
+    <div data-component="Footer"></div>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

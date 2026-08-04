@@ -1,0 +1,21 @@
+{
+  "name": "Ram Saran Yadav",
+  "short_name": "RS Yadav",
+  "description": "Official website of Ram Saran Yadav. Educator & Founder of United Digital Printing Press.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FF7A00",
+  "icons": [
+    {
+      "src": "/RAm.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "/RAm.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

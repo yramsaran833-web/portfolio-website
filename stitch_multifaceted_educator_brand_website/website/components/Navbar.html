@@ -1,0 +1,85 @@
+<nav class="fixed top-0 w-full z-50 bg-[#0a0a0a]/60 backdrop-blur-xl border-b border-white/10 shadow-md transition-all duration-300 py-4">
+    <div class="flex justify-between items-center px-6 md:px-16 max-w-7xl mx-auto">
+        <a href="index.html" class="flex items-center gap-4 group">
+            <img src="assets/img/Logo.png" alt="Ram Saran Yadav Logo" class="h-12 w-auto object-contain drop-shadow-md">
+            <div class="flex flex-col pt-1">
+                <div class="font-heading font-black text-2xl md:text-3xl tracking-tighter relative" style="letter-spacing: -0.05em; line-height: 1;">
+                    <span class="text-white">Ram Saran </span>
+                    <span class="relative inline-block">
+                        <span class="absolute inset-0 bg-[#FF7A00] blur-md opacity-40"></span>
+                        <span class="relative bg-gradient-to-r from-[#FF7A00] to-[#ff3b00] text-transparent bg-clip-text">Yadav</span>
+                    </span>
+                </div>
+                <div class="h-[1px] w-full bg-white/40 my-[3px]"></div>
+                <div class="flex justify-between w-full font-body text-[0.6rem] md:text-[0.65rem] text-white/80 lowercase tracking-wider">
+                    <span>rsy.site</span>
+                    <span>educator & creator</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center space-x-8">
+            <a href="index.html" class="nav-link text-[#9ca3af] hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium">Home</a>
+            <a href="about.html" class="nav-link text-[#9ca3af] hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium">About</a>
+            
+            <!-- Dropdown: Professional Sectors -->
+            <div class="relative group cursor-pointer">
+                <span class="text-[#9ca3af] group-hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium flex items-center gap-1">
+                    Sectors <span class="material-symbols-outlined text-sm">expand_more</span>
+                </span>
+                <div class="absolute top-full right-0 mt-4 w-48 bg-[#171717] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all transform translate-y-2 group-hover:translate-y-0 p-2 flex flex-col gap-1">
+                    <a href="teaching.html" class="px-4 py-2 hover:bg-white/5 rounded-lg text-[#ffffff] font-[Inter] text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px] text-[#FF7A00]">school</span> Teaching
+                    </a>
+                    <a href="printing.html" class="px-4 py-2 hover:bg-white/5 rounded-lg text-[#ffffff] font-[Inter] text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px] text-[#FF7A00]">print</span> Printing Press
+                    </a>
+                    <a href="creator.html" class="px-4 py-2 hover:bg-white/5 rounded-lg text-[#ffffff] font-[Inter] text-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px] text-[#b8c4ff]">videocam</span> Content Creator
+                    </a>
+                </div>
+            </div>
+
+            <a href="gallery.html" class="nav-link text-[#9ca3af] hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium">Gallery</a>
+            <a href="blog.html" class="nav-link text-[#9ca3af] hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium">Blog</a>
+            <a href="resources.html" class="nav-link text-[#9ca3af] hover:text-[#FF7A00] transition-colors font-[Inter] text-sm font-medium">Resources</a>
+
+            <a href="contact.html" class="bg-[#FF7A00] text-white px-6 py-2.5 rounded-lg font-[Inter] text-sm font-bold active:scale-95 transition-transform hover:brightness-110 flex items-center gap-2 shadow-lg shadow-[#FF7A00]/30">
+                Contact Me
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-menu-btn" class="lg:hidden text-[#ffffff] focus:outline-none">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+    </div>
+
+    <!-- Mobile Navigation (Hidden by default) -->
+    <div id="mobile-menu" class="hidden flex-col bg-[#0a0a0a] border-t border-white/10 absolute top-full w-full left-0 p-6 space-y-4 shadow-2xl">
+        <a href="index.html" class="text-[#ffffff] font-[Inter] font-medium block">Home</a>
+        <a href="about.html" class="text-[#ffffff] font-[Inter] font-medium block">About</a>
+        <a href="teaching.html" class="text-[#ffffff] font-[Inter] font-medium block pl-4 border-l border-white/10">- Teaching</a>
+        <a href="printing.html" class="text-[#ffffff] font-[Inter] font-medium block pl-4 border-l border-white/10">- Printing Press</a>
+        <a href="creator.html" class="text-[#ffffff] font-[Inter] font-medium block pl-4 border-l border-white/10">- Content Creator</a>
+        <a href="gallery.html" class="text-[#ffffff] font-[Inter] font-medium block">Gallery</a>
+        <a href="blog.html" class="text-[#ffffff] font-[Inter] font-medium block">Blog</a>
+        <a href="resources.html" class="text-[#ffffff] font-[Inter] font-medium block">Resources</a>
+        <a href="contact.html" class="bg-[#FF7A00] text-white text-center py-3 rounded-lg font-[Inter] font-bold block mt-4">Contact Me</a>
+    </div>
+</nav>
+
+<script>
+    // Highlight active link script
+    (function() {
+        const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('text-[#FF7A00]');
+                link.classList.remove('text-[#9ca3af]');
+                link.classList.add('border-b-2', 'border-[#FF7A00]', 'pb-1');
+            }
+        });
+    })();
+</script>

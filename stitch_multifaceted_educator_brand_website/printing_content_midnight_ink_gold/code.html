@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Printing &amp; Content | Ram Saran Yadav</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdad8",
+                    "background": "#0b1324",
+                    "surface-bright": "#31394b",
+                    "surface-container-highest": "#2d3547",
+                    "surface": "#0b1324",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "on-secondary-fixed": "#390c00",
+                    "on-error": "#690005",
+                    "surface-container-low": "#131b2c",
+                    "surface-container-lowest": "#060e1e",
+                    "secondary": "#ffb59c",
+                    "on-secondary-fixed-variant": "#73341d",
+                    "surface-container": "#171f31",
+                    "inverse-on-surface": "#283042",
+                    "surface-container-high": "#222a3b",
+                    "on-tertiary": "#680010",
+                    "primary": "#b8c4ff",
+                    "primary-fixed": "#dde1ff",
+                    "error-container": "#93000a",
+                    "inverse-primary": "#3755c3",
+                    "on-primary": "#002584",
+                    "on-primary-container": "#a8b8ff",
+                    "tertiary-fixed-dim": "#ffb3b0",
+                    "surface-variant": "#2d3547",
+                    "on-secondary": "#571f09",
+                    "on-error-container": "#ffdad6",
+                    "outline-variant": "#444653",
+                    "on-tertiary-fixed": "#410006",
+                    "tertiary": "#ffb3b0",
+                    "tertiary-container": "#9b001d",
+                    "outline": "#8e909f",
+                    "on-primary-fixed": "#001453",
+                    "secondary-container": "#76361f",
+                    "secondary-fixed-dim": "#ffb59c",
+                    "on-surface-variant": "#c4c5d5",
+                    "on-background": "#dae2fa",
+                    "surface-dim": "#0b1324",
+                    "surface-tint": "#b8c4ff",
+                    "on-tertiary-fixed-variant": "#93001b",
+                    "on-surface": "#dae2fa",
+                    "on-tertiary-container": "#ffa3a0",
+                    "inverse-surface": "#dae2fa",
+                    "error": "#ffb4ab",
+                    "on-secondary-container": "#fba283",
+                    "secondary-fixed": "#ffdbcf",
+                    "primary-container": "#1e40af",
+                    "on-primary-fixed-variant": "#173bab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "lg": "48px",
+                    "sm": "12px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "xl": "80px",
+                    "margin-desktop": "64px",
+                    "xs": "4px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "headline-lg-mobile": ["Montserrat"],
+                    "display-lg": ["Montserrat"],
+                    "headline-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(36, 47, 73, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 67, 88, 0.5);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 40px 0 rgba(30, 64, 175, 0.15);
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 1px;
+            border-radius: 1rem;
+            background: linear-gradient(to bottom, rgba(184, 196, 255, 0.4), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-md">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Ram Saran Yadav</div>
+<div class="hidden md:flex items-center gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Teaching</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Printing</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Content</a>
+</div>
+<button class="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-80 transition-opacity active:scale-95 transition-transform">
+                Contact
+            </button>
+</nav>
+</header>
+<main class="pt-32 pb-xl">
+<!-- Hero Section for Printing -->
+<section class="px-margin-desktop max-w-7xl mx-auto mb-xl">
+<div class="grid md:grid-cols-2 gap-lg items-center">
+<div class="space-y-md">
+<span class="text-secondary font-label-md tracking-widest uppercase">Creative Solutions</span>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight">
+                        Precision Printing &amp; <br/>
+<span class="text-primary">Content Identity.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        Elevating brands through high-fidelity flex printing and strategic digital content creation. We blend industrial precision with artistic vision.
+                    </p>
+<div class="flex gap-md pt-4">
+<button class="bg-primary-container text-white px-base py-sm rounded-lg font-label-md hover:opacity-90 transition-all flex items-center gap-xs">
+                            View Portfolio <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="relative h-[450px] rounded-xl overflow-hidden glass-card p-2">
+<div class="w-full h-full rounded-lg bg-cover bg-center" data-alt="A macro close-up of a high-end commercial printing press in operation, with droplets of vibrant blue and magenta ink being applied to a textured surface. The scene is shot in a dark, atmospheric studio with soft blue ambient lighting and sharp metallic reflections on the machine's components. The mood is precise, industrial, and high-tech." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaYFVyXBOLzIfPgRx--vXOfqlS-mFOcW9Whge1ddOy2wlpAZruN5WsIBboxETAigVms-xbUGWgcF0-oIPdMRKOc0Vz24vZ19W4gYbti4wMtjAe5WPxKliAKZWTYhabaLZJCTEw5doKZclFo5E7TGJojgl8W7Do2XxmsVtSnNmDiWKIKuU_smrWFXrgJabyqwFMiqPzwKsL5uX-BXA9BLtqxiXuj7tCC4PqDQxJ4Scwk2XmJ0KSuufHLg')">
+</div>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="text-center mb-lg">
+<h2 class="font-headline-lg text-headline-lg mb-4">Core Services</h2>
+<p class="text-on-surface-variant font-body-md">Industrial quality meets creative design excellence.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-md">
+<!-- Service 1 -->
+<div class="glass-card p-lg rounded-xl neon-glow transition-all group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-md group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">print</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Flex Printing</h3>
+<p class="text-on-surface-variant font-body-md mb-md">Large-scale industrial flex printing for outdoor advertising, events, and commercial signage with high UV resistance.</p>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+</div>
+<!-- Service 2 -->
+<div class="glass-card p-lg rounded-xl neon-glow transition-all group">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-md group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl">brush</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Graphic Design</h3>
+<p class="text-on-surface-variant font-body-md mb-md">Bespoke visual identities, logo design, and brand collateral tailored to resonate with your target demographic.</p>
+<div class="h-1 w-12 bg-secondary rounded-full"></div>
+</div>
+<!-- Service 3 -->
+<div class="glass-card p-lg rounded-xl neon-glow transition-all group">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center mb-md group-hover:bg-tertiary/20 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-3xl">campaign</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-2 text-on-surface">Banner Ads</h3>
+<p class="text-on-surface-variant font-body-md mb-md">High-impact banner printing on premium materials, ensuring your message stands out in any environment.</p>
+<div class="h-1 w-12 bg-tertiary rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Content Ecosystem -->
+<section class="bg-surface-container-low py-xl">
+<div class="px-margin-desktop max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-lg gap-md">
+<div class="max-w-2xl">
+<span class="text-primary font-label-md">Digital Presence</span>
+<h2 class="font-headline-lg text-headline-lg mt-2">Content Ecosystem</h2>
+<p class="text-on-surface-variant font-body-md mt-4">We don't just print; we build influence. Our content strategy covers educational videos and social media management for maximum reach.</p>
+</div>
+<button class="border border-outline text-on-surface px-6 py-2 rounded-lg font-label-md hover:bg-white/5 transition-colors">Explore Influence</button>
+</div>
+<div class="grid md:grid-cols-2 gap-gutter">
+<!-- Video Card -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/2 min-h-[250px] bg-cover bg-center" data-alt="A professional video editing studio setup with multiple high-resolution monitors glowing in a dark room. The screens show complex timeline sequences and color grading interfaces. Soft amber and teal backlighting creates a cinematic atmosphere. High-end headphones and a microphone are visible on the desk, emphasizing professional content production." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC719grB3ps69-VxUw-e4iNj1g0432cqZgX8yeS5eIYtbwHk1rpyQtruwtgZGf97xi8o0tYhHMQtgvbgEpcQxeikke08eHa0ZXwirLKiyBGYIM2wvNKBrrmmEltwVRyFcDeW-QMecngfwxUewxR_UkLU10yIwBawYtxMfFMa58WZT7sw4vKa3jyKywyW_D-1iWKMvN_44CDyC7fJz8dnMEDD72Y6AWoDM2mq8NytnUOSZX2U5Ou0U2a6g')"></div>
+<div class="p-lg md:w-1/2 flex flex-col justify-center">
+<h4 class="font-headline-md text-on-surface mb-2">Video Production</h4>
+<p class="text-on-surface-variant font-body-md mb-4">Educational series and promotional shorts designed for viral engagement.</p>
+<span class="text-primary font-label-md flex items-center gap-xs cursor-pointer hover:underline">Watch Reel <span class="material-symbols-outlined">play_circle</span></span>
+</div>
+</div>
+<!-- Social Card -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/2 min-h-[250px] bg-cover bg-center" data-alt="A sleek smartphone display showing a curated social media feed with professional photography and high-contrast graphics. The phone sits on a dark marble surface next to a gold-accented pen and a cup of black coffee. The lighting is moody and sophisticated, highlighting the premium nature of digital brand management." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDv_NYR8IMpxLBCLOnHmiEEpdTkpjZOjZJ67ChS9k3SJ49y5u4mmWfEiyH_VZnDOmWTS4iE1NUo8Y0T9zJSkg8QVgjNLeCzk8anUhumb1iu33OKn-Jd6SjvMwukRQ1a1pzlouTao7HxUIn3lZskTBpg5VkfYnfsJY67ByXzMwgoTdoEvaMUha29oz1jzoAL3Bw_ukDIxgdDopx24Y84SC5nYpzBSGiz3DLqxanplqgWHNV6JEjICKDt7Q')"></div>
+<div class="p-lg md:w-1/2 flex flex-col justify-center">
+<h4 class="font-headline-md text-on-surface mb-2">Social Strategy</h4>
+<p class="text-on-surface-variant font-body-md mb-4">Managing 100k+ followers with strategic posting and community building.</p>
+<span class="text-secondary font-label-md flex items-center gap-xs cursor-pointer hover:underline">See Analytics <span class="material-symbols-outlined">trending_up</span></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Studio Portfolio -->
+<section class="px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="flex justify-between items-center mb-lg">
+<h2 class="font-headline-lg text-headline-lg">Studio Portfolio</h2>
+<div class="flex gap-sm">
+<button class="p-2 border border-outline rounded-full hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">grid_view</span></button>
+<button class="p-2 border border-outline rounded-full hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">view_carousel</span></button>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Masonry-like item 1 -->
+<div class="col-span-2 row-span-2 group relative overflow-hidden rounded-xl border border-white/10 h-[400px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A large-scale outdoor advertising billboard featured in a modern urban setting at dusk. The billboard displays a vibrant, high-contrast graphic design with glowing primary blue and gold accents. The city lights in the background are softly blurred, and the billboard's surface has a high-quality, professional finish, demonstrating the excellence of industrial flex printing." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5e0-IzwQtgnKorGrb1oJ-Mv21gwe65ZXlv66gsrfN6pqs8ZttVQufme654eoem3sMO8PIG_JpA0T08wfGmv86IM9RMAnLseMF2sFDUEWljFjbUJZcms2pex_r27Xz506qpaxTikDgOKfmSnZMsz-xtvi_l5CpQbDPliLdFKwrTiudDBN5Zn0sufmO0jPIbEmwSpTJfrxy0lTOZjlHpgriYbinGHQcjtF9HaAoxYoDoDW8sEbarVrQqQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-lg">
+<div>
+<p class="text-primary font-label-sm uppercase mb-1">Commercial Project</p>
+<h5 class="text-white font-headline-md">Skyline Flex Signage</h5>
+</div>
+</div>
+</div>
+<!-- item 2 -->
+<div class="group relative overflow-hidden rounded-xl border border-white/10 h-[190px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A collection of professionally designed brand stationery, including business cards and letterheads, laid out on a dark slate surface. The designs feature minimalist typography and a sophisticated palette of midnight blue and gold foil accents. The lighting is focused and sharp, highlighting the premium texture of the printed materials." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBf4UJ4ttL0DsWytChkbZ5uIH97xQkiZOGED0dCREOooH8XotTcFGDsc4ruHNW8_-_z7IWJzagD_dD1SF4A3bKFbqAsVyfi7AIKtG6SKmBebGkpRICRksJYJvcsm1W9YBnF2uWCxIju5KAnwev0dMGXgYQTToC-ygyI8SVnjSkp57KcEHvnJv-ypXlfYBKSONEn_FcfrsupMFCD5OCe5FBujb9RWanUS-R1VBagOGp-j3zRWXBsr2_Pjw')"></div>
+</div>
+<!-- item 3 -->
+<div class="group relative overflow-hidden rounded-xl border border-white/10 h-[190px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A vibrant, multi-layered graphic design poster displayed on a studio wall. The artwork uses bold geometric shapes and abstract forms in a rich color scheme of deep red, navy, and sunset orange. Soft shadows give the poster a physical, high-quality appearance, suggesting expert printing and artistic direction." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD3ZjYLXHc3b9D1O4cSbpB7NLoJ1BYJp_EGXcpmE_ZLxHlcCT3TNjbz9SY89rZY4lr50nsHubJuQVBJ_z4QVA6Ci3pRqZDWNz7WwTNW3249akuH6XLkzPL2MSBvctb3S4lTFWCDix55Xi0JSH7ckynpxoSPrjXMgNGLaEke8Hj0P415DqqBKCoeJWggDpJaLX4aSrlJ0ieaKDu_ve_8gZoNqeUmDDdq9wwuxPUVq2CGJ0U9LBXkSCM5lQ')"></div>
+</div>
+<!-- item 4 -->
+<div class="col-span-2 group relative overflow-hidden rounded-xl border border-white/10 h-[186px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="A montage of social media content templates for a high-end luxury brand, featuring sleek typography and atmospheric lifestyle photography. The layout is clean and asymmetric, with a strong focus on cinematic lighting and a moody dark-theme aesthetic. The image conveys a sense of modern digital influence and strategic content creation." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4SVr3I2swCiFunJVWI3DtBESlg4Z8UyZwSO14u_l1DFqTxkGchBYpNT7_xfZx6f6PrlahE7Q0yz2K2Xz5Xhop_wTsd4W9kV4im2jC0h95QuY6N31KPhA4R7LWTqTKmx81lNZYC6-Puo8BeSqF1U0H30Jif9ljcCNDsPM7WRWOOqZxL6we4pWE7mI9Yjhx3tk6H3h-IPc35VJS_KpzhfSSphSVkwP9CRj4iAFjksajdsN49A7tJFvS8w')"></div>
+</div>
+</div>
+</section>
+<!-- CTA & Contact Form -->
+<section class="px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="glass-card rounded-2xl p-lg md:p-xl grid md:grid-cols-2 gap-lg relative overflow-hidden">
+<!-- Background Glow -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10"></div>
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-4">Let's Build Your <br/><span class="text-secondary">Vision.</span></h2>
+<p class="text-on-surface-variant font-body-md mb-8 max-w-sm">Ready to elevate your brand presence? Send us a message and let's discuss your next big printing or content project.</p>
+<div class="space-y-sm">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+<span class="font-body-md">contact@ramsaran.com</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">call</span>
+</div>
+<span class="font-body-md">+91 98765 43210</span>
+</div>
+</div>
+</div>
+<form class="space-y-md">
+<div class="grid grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant ml-1">Name</label>
+<input class="w-full bg-background border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-outline" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant ml-1">Email</label>
+<input class="w-full bg-background border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-outline" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant ml-1">Project Type</label>
+<select class="w-full bg-background border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all text-on-surface">
+<option>Flex Printing</option>
+<option>Graphic Design</option>
+<option>Content Strategy</option>
+<option>Social Media</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant ml-1">Message</label>
+<textarea class="w-full bg-background border border-outline-variant rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder:text-outline resize-none" placeholder="Tell us about your project..." rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-bold text-label-md hover:opacity-90 active:scale-[0.98] transition-all">Send Inquiry</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md px-margin-desktop py-xl max-w-7xl mx-auto">
+<div class="space-y-md">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Ram Saran Yadav</div>
+<p class="text-on-surface-variant font-body-md max-w-xs">Empowering creators and brands through teaching, printing, and strategic content.</p>
+<div class="flex gap-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">video_library</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+</div>
+</div>
+<div class="space-y-md">
+<h6 class="text-on-surface font-bold uppercase tracking-widest text-label-sm">Quick Links</h6>
+<ul class="space-y-sm">
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">About Me</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">Services</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">Portfolio</a></li>
+<li><a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-md">
+<h6 class="text-on-surface font-bold uppercase tracking-widest text-label-sm">Newsletter</h6>
+<p class="text-on-surface-variant font-body-md">Stay updated with our latest workshops and design tips.</p>
+<div class="flex gap-2">
+<input class="bg-surface border border-outline-variant rounded-lg px-4 py-2 w-full focus:ring-1 focus:ring-primary outline-none" placeholder="Email" type="email"/>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md hover:opacity-90">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-margin-desktop py-md border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="text-on-surface-variant font-body-md">© 2024 Ram Saran Yadav. All rights reserved.</p>
+<div class="flex gap-lg">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors cursor-pointer" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll reveal effect for cards
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

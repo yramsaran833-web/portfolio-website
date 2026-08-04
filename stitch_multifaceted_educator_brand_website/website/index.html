@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <!-- ENTERPRISE SEO INJECTION -->
+<title>Ram Saran Yadav | Educator, Entrepreneur & Digital Creator</title>
+<meta name="description" content="Official website of Ram Saran Yadav. Government Teacher at Shree Janta Secondary School and Founder of United Digital Printing Press.">
+<link rel="canonical" href="https://ramsaran.com/index.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:title" content="Ram Saran Yadav | Educator, Entrepreneur & Digital Creator">
+<meta property="og:description" content="Official website of Ram Saran Yadav. Government Teacher at Shree Janta Secondary School and Founder of United Digital Printing Press.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ramsaran.com/index.html">
+<meta property="og:image" content="https://ramsaran.com/RAm.jpg">
+<meta property="og:site_name" content="Ram Saran Yadav">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ram Saran Yadav | Educator, Entrepreneur & Digital Creator">
+<meta name="twitter:description" content="Official website of Ram Saran Yadav. Government Teacher at Shree Janta Secondary School and Founder of United Digital Printing Press.">
+<meta name="twitter:image" content="https://ramsaran.com/RAm.jpg">
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Ram Saran Yadav",
+            "jobTitle": "Government Teacher & Entrepreneur",
+            "worksFor": [
+                { "@type": "Organization", "name": "Shree Janta Secondary School" },
+                { "@type": "Organization", "name": "United Digital Printing Press" }
+            ],
+            "url": "https://ramsaran.com",
+            "image": "https://ramsaran.com/RAm.jpg",
+            "sameAs": [
+                "https://www.facebook.com/ramsaran.yadav.73",
+                "https://youtube.com/@ramsaranyadav-r7v",
+                "https://www.tiktok.com/@ramsaran3389"
+            ]
+        }
+        
+</script>
+<!-- END SEO INJECTION -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const canvas = document.getElementById("scroll-sequence");
+            if(!canvas) return;
+            const context = canvas.getContext("2d");
+            const loading = document.getElementById("hero-loading");
+            const loadingText = document.getElementById("hero-loading-text");
+            
+            const frameCount = 100;
+            // Images are 0 to 99
+            const currentFrame = index => `Final_Teacher/Teaching_${index.toString().padStart(3, '0')}.jpg`;
+            
+            const images = [];
+            let loaded = 0;
+            
+            function drawImageCover(ctx, img, w, h) {
+                const imgRatio = img.width / img.height;
+                const canvasRatio = w / h;
+                let renderW, renderH, x = 0, y = (h - renderH) * 0.25;
+                if(imgRatio > canvasRatio) {
+                    renderH = h;
+                    renderW = h * imgRatio;
+                    x = (w - renderW) / 2;
+                } else {
+                    renderW = w;
+                    renderH = w / imgRatio;
+                    y = (h - renderH) * 0.25;
+                }
+                ctx.drawImage(img, x, y, renderW, renderH);
+            }
+
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.parentElement.getBoundingClientRect();
+                
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                
+                canvas.style.width = `${rect.width}px`;
+                canvas.style.height = `${rect.height}px`;
+                
+                context.scale(dpr, dpr);
+                return { w: rect.width, h: rect.height };
+            }
+
+            for (let i = 0; i < frameCount; i++) {
+                const img = new Image();
+                img.src = currentFrame(i);
+                img.onload = () => {
+                    loaded++;
+                    loadingText.innerText = `Loading Sequence ${Math.floor((loaded / frameCount) * 100)}%`;
+                    if (loaded === frameCount) {
+                        loading.style.opacity = '0';
+                        setTimeout(() => loading.style.display = 'none', 500);
+                    }
+                    if (i === 0) {
+                        const dims = resizeCanvas();
+                        drawImageCover(context, img, dims.w, dims.h);
+                    }
+                };
+                images.push(img);
+            }
+            
+            let isScrolling = false;
+            window.addEventListener('scroll', () => {  
+                if (!isScrolling) {
+                    window.requestAnimationFrame(() => {
+                        const scrollTop = window.scrollY;
+                        const maxScroll = window.innerHeight * 4; 
+                        
+                        if (scrollTop <= maxScroll) {
+                            let scrollFraction = scrollTop / maxScroll;
+                            if (scrollFraction > 1) scrollFraction = 1;
+                            if (scrollFraction < 0) scrollFraction = 0;
+                            
+                            const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+                            if (images[frameIndex] && images[frameIndex].complete) {
+                                const dims = { w: canvas.clientWidth, h: canvas.clientHeight };
+                                context.clearRect(0, 0, canvas.width, canvas.height);
+                                drawImageCover(context, images[frameIndex], dims.w, dims.h);
+                            }
+                        }
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+            });
+            
+            window.addEventListener('resize', () => {
+                const dims = resizeCanvas();
+                const scrollTop = window.scrollY;
+                const maxScroll = window.innerHeight * 4;
+                let scrollFraction = scrollTop / maxScroll;
+                if (scrollFraction > 1) scrollFraction = 1;
+                if (scrollFraction < 0) scrollFraction = 0;
+                const frameIndex = Math.min(frameCount - 1, Math.floor(scrollFraction * frameCount));
+                
+                if(images[frameIndex] && images[frameIndex].complete) {
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    drawImageCover(context, images[frameIndex], dims.w, dims.h);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

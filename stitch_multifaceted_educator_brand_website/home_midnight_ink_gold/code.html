@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ram Saran Yadav | Teacher, Entrepreneur, Creator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdad8",
+                        "background": "#0b1324",
+                        "surface-bright": "#31394b",
+                        "surface-container-highest": "#2d3547",
+                        "surface": "#0b1324",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "on-secondary-fixed": "#390c00",
+                        "on-error": "#690005",
+                        "surface-container-low": "#131b2c",
+                        "surface-container-lowest": "#060e1e",
+                        "secondary": "#ffb59c",
+                        "on-secondary-fixed-variant": "#73341d",
+                        "surface-container": "#171f31",
+                        "inverse-on-surface": "#283042",
+                        "surface-container-high": "#222a3b",
+                        "on-tertiary": "#680010",
+                        "primary": "#b8c4ff",
+                        "primary-fixed": "#dde1ff",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#3755c3",
+                        "on-primary": "#002584",
+                        "on-primary-container": "#a8b8ff",
+                        "tertiary-fixed-dim": "#ffb3b0",
+                        "surface-variant": "#2d3547",
+                        "on-secondary": "#571f09",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#444653",
+                        "on-tertiary-fixed": "#410006",
+                        "tertiary": "#ffb3b0",
+                        "tertiary-container": "#9b001d",
+                        "outline": "#8e909f",
+                        "on-primary-fixed": "#001453",
+                        "secondary-container": "#76361f",
+                        "secondary-fixed-dim": "#ffb59c",
+                        "on-surface-variant": "#c4c5d5",
+                        "on-background": "#dae2fa",
+                        "surface-dim": "#0b1324",
+                        "surface-tint": "#b8c4ff",
+                        "on-tertiary-fixed-variant": "#93001b",
+                        "on-surface": "#dae2fa",
+                        "on-tertiary-container": "#ffa3a0",
+                        "inverse-surface": "#dae2fa",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#fba283",
+                        "secondary-fixed": "#ffdbcf",
+                        "primary-container": "#1e40af",
+                        "on-primary-fixed-variant": "#173bab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "lg": "48px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "xl": "80px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-lg": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(36, 47, 73, 0.6);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(30, 64, 175, 0.15) 0%, rgba(30, 64, 175, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-glow {
+            box-shadow: 0 0 40px rgba(30, 64, 175, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-md">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Ram Saran Yadav</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Teaching</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Printing</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md" href="#">Content</a>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-transform hover:opacity-90">
+                    Contact
+                </button>
+</div>
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden px-margin-desktop max-w-7xl mx-auto py-xl">
+<div class="hero-glow -top-20 -right-20"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md items-center relative z-10 w-full">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full mb-6 border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-secondary uppercase tracking-wider">Now Impacting Lives</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface leading-tight mb-6">
+                        Inspiring Minds.<br/>
+                        Creating Opportunities.<br/>
+                        Delivering Quality.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-10">
+                        A dedicated educator, visionary entrepreneur, and creative content producer. Ram Saran Yadav bridges the gap between academic excellence and industrial innovation.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-label-md text-label-md font-bold shadow-lg shadow-primary-container/20 hover:scale-105 transition-transform">
+                            Start Learning
+                        </button>
+<button class="border border-outline-variant text-on-surface px-8 py-4 rounded-lg font-label-md text-label-md font-bold hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">play_circle</span>
+                            Watch Content
+                        </button>
+</div>
+<div class="mt-12 flex items-center gap-6">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of a professional student with a bright smile, wearing business casual attire. The lighting is soft and warm, conveying a sense of success and positivity within a modern educational setting. Deep blue and gold accents are subtly visible in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVpV7xIF-0KlCIsDVffG_ztxIzt5EsPA9DzcgHExvDLo5C9AmL2462nogJ-fwZbmqGniOvwDon-CRn419C9NmoQWaHxwwcdqdvY5vl4y6T19a2jlsouhuj6swpbSPNJK_tQtP6dVHzhfukYaR5aoocK3I2zSNd7NB3LrCeZ8BHPnbEv2CfWdwRVao-9KEOSdxQ9nj-4XePnD3ywapLghir5Urd_Su2rs5yDOoU6wGt8VerLGM_tiaOMw"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a young female entrepreneur looking forward with confidence. Her professional look is complemented by a high-contrast dark navy background with cinematic lighting. The aesthetic is modern, sleek, and high-end corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-3q4cXaz464KD6_akhRAXbnR4-LrKgrq3duHyMCyeWIhtCauc9xg65q8wOtAD4S-WTQJRKx8t6EdBIO9A2Pqg5Hu75HUeCHdK1joh6HEurDma75L_tTAej6HK3IKFc3UIqJ2FHKWATq5hw2h1QvvS8IvVYWIpzzXjkrpK2ZaHzrTkxh1QKzXFxJBgn2SDRtWtuCjm4_CvfHgaGZWxjSnoT-VfVWdXjJpjRGLr64lxgiTI2wiNlIPPjQ"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A successful middle-aged professional male with a kind expression. He is set against a dark atmospheric background with subtle blue gradients. The lighting highlights his features sharply, suggesting authority and experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbWOxQdzCKM1TVztA4esmZe4Eemc-fpmRkv7dEabiZEQxryN7uKQ1JE1flpI339VUVn83mJN6vnLxz50vHK3LzZgiGg5i1ZfXFZi28MVLJqtox95UuhnAyA971_nt2c_UXAgs5yyvMEovyy1_VGNJtW8LQTGsEW3w19ktittFx_c-k9ewGjoDlH5ywGinOp2dWAG6sMlbwbNbNRZJgzbxuMKK-oUSj8eSKTxNaYnPmV6jH_gNT5-y6Gg"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-secondary text-on-secondary-fixed flex items-center justify-center font-bold text-xs">
+                                +5k
+                            </div>
+</div>
+<div>
+<div class="flex items-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="ml-2 text-on-surface font-bold">4.9</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Trusted by Students &amp; Clients</p>
+</div>
+</div>
+</div>
+<div class="relative flex justify-center items-center">
+<div class="absolute w-[80%] h-[80%] bg-primary/20 blur-[100px] rounded-full"></div>
+<div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden glass-card p-2 border border-white/10 shadow-2xl">
+<img alt="Ram Saran Yadav" class="w-full h-full object-cover rounded-2xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3uZtRsGL4f2qrOcYX7oSIFH8zg4KIFohVdap9Q2uDMcjic5BEx-RyULwj3ocZCN9aQ3tTa_nyoNu8YRoB5QYdumfbRsdCYzZ1YOfiZCsYPTNgTH4FvCcHSLk7woHvKWz-zi4PRU5HS4Vlaxjubi0QhbWVK_vVmEFoowJ7Ue-bBwq1yoTKLshxzssLLmZgvHf1bEvUNAEcj860bIgnHwPE9J9RmMf7k-W91dLi2dGcyRbqJvdz2la8Rg"/>
+<div class="absolute bottom-6 right-6 glass-card px-6 py-4 rounded-xl border border-white/20 active-glow">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary/20 rounded-lg text-secondary">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-display-lg font-bold text-on-surface leading-none">10+</p>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-tighter">Years Exp</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="px-margin-desktop py-xl max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Stat 1 -->
+<div class="glass-card p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-surface-container-high transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">school</span>
+</div>
+<h3 class="text-headline-lg font-bold text-on-surface mb-2">5000+</h3>
+<p class="text-on-surface-variant font-label-md">Students Mentored</p>
+</div>
+<!-- Stat 2 -->
+<div class="glass-card p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-surface-container-high transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">print</span>
+</div>
+<h3 class="text-headline-lg font-bold text-on-surface mb-2">10000+</h3>
+<p class="text-on-surface-variant font-label-md">Printing Orders</p>
+</div>
+<!-- Stat 3 -->
+<div class="glass-card p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-surface-container-high transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">movie</span>
+</div>
+<h3 class="text-headline-lg font-bold text-on-surface mb-2">300+</h3>
+<p class="text-on-surface-variant font-label-md">Videos Created</p>
+</div>
+<!-- Stat 4 -->
+<div class="glass-card p-8 rounded-2xl flex flex-col items-center text-center group hover:bg-surface-container-high transition-all duration-300">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl">trending_up</span>
+</div>
+<h3 class="text-headline-lg font-bold text-on-surface mb-2">99%</h3>
+<p class="text-on-surface-variant font-label-md">Success Rate</p>
+</div>
+</div>
+</section>
+<!-- Areas of Excellence Section -->
+<section class="px-margin-desktop py-xl max-w-7xl mx-auto bg-surface-container-lowest/50 rounded-[40px]">
+<div class="text-center mb-16">
+<p class="text-secondary font-label-md tracking-widest uppercase mb-4">Core Competencies</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Areas of Excellence</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="relative group">
+<div class="absolute inset-0 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl"></div>
+<div class="relative glass-card p-md rounded-3xl h-full flex flex-col border border-white/5 overflow-hidden">
+<div class="h-48 rounded-xl bg-surface-container-high mb-8 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean, cinematic photograph of a modern classroom setting at night. A large digital screen displays complex mathematical equations and coding structures. The lighting is dominated by deep blues and soft golds, reflecting on mahogany furniture. The overall atmosphere is scholarly, futuristic, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXfIQBRztKoVXf3W6ONYIYM6shhswWaDvXTu9EB9l250N2eo_qzO-WsnDGAoaTYzpueZYekCWC9AX1iTECO4qa3vSiIX0oKAg3e7cc8ETzTQDfQyueYZ_DpENzLULePgbdgs-d4xW9lVQiCVbR5L56ETS5C0z0naj7kfXxZx9RJRvzqQYYkERi8CujIvgqNvtD9Ks50kheG7zI-ay4oyJISAdYSjV3CER1_Zfz1lTLKiv_6bJpnfkzuQ"/>
+</div>
+<h4 class="text-headline-md font-bold text-on-surface mb-4">Teaching Journey</h4>
+<p class="text-on-surface-variant mb-8 flex-grow">
+                            Revolutionizing education through practical engagement and personalized mentorship. Empowering the next generation with future-ready skills.
+                        </p>
+<a class="inline-flex items-center text-primary font-bold group/link" href="#">
+                            Learn More 
+                            <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group">
+<div class="absolute inset-0 bg-secondary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl"></div>
+<div class="relative glass-card p-md rounded-3xl h-full flex flex-col border border-white/5 overflow-hidden">
+<div class="h-48 rounded-xl bg-surface-container-high mb-8 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="High-resolution industrial printing machine in motion, capturing a high-speed blur of colorful ink and precise mechanical parts. The scene is lit with cool blue industrial LEDs, highlighting polished steel surfaces and vibrant CMYK output. The style is technologically advanced and captures the power of industrial production." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsNMPST1MHSISn3m3d75x4AzgXReXoJoRdoU5kWnc5YX4xsnh9GXRtJrdpGE4jdptLFR70Uhjt50DIPqFQfA3OAJLH11uAd8570fKcf9bE3wQ0dj6rj91sKPqbBxdcFatjSc1BQHZA3uuf5tA3wO07WTXOCk3Ph1gDerIHkpkYkVRHMrmtQWiAlyRUykloyu_ssExL-ClPetJlqeHA-w6UR-aRDfcby-SIAe4MxeaD381A7Z3myIWzXw"/>
+</div>
+<h4 class="text-headline-md font-bold text-on-surface mb-4">Industrial Printing</h4>
+<p class="text-on-surface-variant mb-8 flex-grow">
+                            Scalable, high-quality printing solutions for enterprise needs. Combining precision technology with efficient logistics.
+                        </p>
+<a class="inline-flex items-center text-secondary font-bold group/link" href="#">
+                            View Services 
+                            <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group">
+<div class="absolute inset-0 bg-tertiary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl"></div>
+<div class="relative glass-card p-md rounded-3xl h-full flex flex-col border border-white/5 overflow-hidden">
+<div class="h-48 rounded-xl bg-surface-container-high mb-8 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional video editing studio setup featuring dual wide-screen monitors displaying high-end cinematic footage and complex timeline layouts. Professional studio lighting with orange and teal color grading illuminates a high-end microphone and acoustic panels. The mood is creative, focused, and ultra-modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqLWmtlqcsqqrOtcZqUU4UKMIMCaS5UCpkubMR7pQr6UUo1HxGsWJ9kzTrudAU9O-pQTAF_eFzn5n03pLUyQevJdBIZdkJ9isEgX1OuIsEP4UGVdLQtQj03CawSMl0uyoLnQpAnjiLbyzuDzezJjD2lgoyrDSXNs4woBWJwfFNVtgC-_GLd_H9gUNKw3tHTceip65CTf0_5N7iwvU7NumoR-VP9QEKMBUojs7M6ztUqWenZl4qYcvJBw"/>
+</div>
+<h4 class="text-headline-md font-bold text-on-surface mb-4">Content Creation</h4>
+<p class="text-on-surface-variant mb-8 flex-grow">
+                            Sharing knowledge at scale through high-production video content and engaging digital storytelling.
+                        </p>
+<a class="inline-flex items-center text-tertiary font-bold group/link" href="#">
+                            Explore Channel 
+                            <span class="material-symbols-outlined ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="px-margin-desktop py-xl max-w-7xl mx-auto">
+<div class="relative rounded-[40px] overflow-hidden bg-gradient-to-br from-surface-container-high to-background border border-white/10 p-12 md:p-24 text-center">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-6">Ready to Start Your Journey?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
+                        Whether you are looking to master a new skill, need high-quality printing services, or want to collaborate on content, let's create something extraordinary together.
+                    </p>
+<div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+<button class="bg-secondary text-on-secondary-fixed px-10 py-5 rounded-xl font-headline-md text-label-md font-bold active:scale-95 transition-transform hover:shadow-lg hover:shadow-secondary/20">
+                            Book a Consultation
+                        </button>
+<button class="glass-card text-on-surface px-10 py-5 rounded-xl font-headline-md text-label-md font-bold hover:bg-white/5 transition-colors border border-white/10">
+                            Download Portfolio
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant mt-xl">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md px-margin-desktop py-xl max-w-7xl mx-auto">
+<div class="space-y-6">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Ram Saran Yadav</div>
+<p class="text-on-surface-variant max-w-xs">
+                    Building a legacy through education, industry, and media. Empowering the next generation of thinkers and doers.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">video_library</span>
+</a>
+<a class="w-10 h-10 rounded-full glass-card flex items-center justify-center hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8 md:col-span-2">
+<div>
+<h5 class="text-on-surface font-bold mb-6 uppercase text-sm tracking-widest">Navigation</h5>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">About Me</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Services</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Portfolio</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-on-surface font-bold mb-6 uppercase text-sm tracking-widest">Legal</h5>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li class="mt-8">
+<p class="text-on-surface-variant text-label-sm">© 2024 Ram Saran Yadav. All rights reserved.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple scroll effect for navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-4');
+                nav.style.backgroundColor = 'rgba(11, 19, 36, 0.8)';
+            } else {
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+                nav.style.backgroundColor = 'rgba(11, 19, 36, 0.6)';
+            }
+        });
+    </script>
+</body></html>

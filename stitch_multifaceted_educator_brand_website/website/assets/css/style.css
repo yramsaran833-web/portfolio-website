@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --color-midnight: #0a0a0a;
+    --color-midnight-light: #171717;
+    --color-gold: #FF7A00;
+    --color-text-main: #ffffff;
+    --color-text-muted: #9ca3af;
+    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+    cursor: none !important; /* Hide default cursor for luxury custom cursor */
+}
+
+body {
+    background-color: var(--color-midnight);
+    color: var(--color-text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em; /* Editorial tracking */
+}
+
+/* -------------------------------------
+   Premium Glassmorphism
+-------------------------------------- */
+.glass-panel {
+    background: rgba(23, 23, 23, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+    transform: translateY(-4px) scale(1.01);
+    background: rgba(23, 23, 23, 0.8);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(255, 122, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 122, 0, 0.3);
+}
+
+/* -------------------------------------
+   Custom Luxury Cursor
+-------------------------------------- */
+#custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+#custom-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 122, 0, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+/* Hover state on interactive elements */
+body.hovering-link #custom-cursor-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+    box-shadow: 0 0 15px #fff;
+}
+body.hovering-link #custom-cursor-ring {
+    width: 50px;
+    height: 50px;
+    border-color: #fff;
+    background-color: rgba(255,255,255,0.05);
+}
+
+/* Hide custom cursor on mobile */
+@media (max-width: 768px) {
+    #custom-cursor-dot, #custom-cursor-ring { display: none; }
+    * { cursor: auto !important; }
+}
+
+/* -------------------------------------
+   Global Loading Screen
+-------------------------------------- */
+#global-loader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-midnight);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#global-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 122, 0, 0.2);
+    border-top-color: var(--color-gold);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.6, 0.2, 0.4, 0.8) infinite, glowPulse 2s infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(255, 122, 0, 0.2); }
+    50% { box-shadow: 0 0 30px rgba(255, 122, 0, 0.6); }
+}
+
+/* -------------------------------------
+   Animations & Micro-Interactions
+-------------------------------------- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: var(--transition-bounce);
+}
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Shimmer Button Effect */
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.shimmer-btn:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
+/* Floating Animation */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Glow Effects */
+.glow-primary {
+    box-shadow: 0 0 40px rgba(255, 122, 0, 0.2);
+}
+
+/* Hide Scrollbar but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Logo Specifics */
+.logo-text-base { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.8rem; letter-spacing: -0.05em; line-height: 1; text-transform: lowercase; }
+.logo-outline { -webkit-text-stroke: 2px #FF7A00; color: transparent; }
+.logo-filled { color: #ffffff; }

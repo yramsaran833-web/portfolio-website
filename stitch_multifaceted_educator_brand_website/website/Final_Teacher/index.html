@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smooth Scroll Animation - Final Teacher</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            height: 500vh; /* Provide enough scroll space for frames */
+        }
+        canvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100vw;
+            max-height: 100vh;
+            object-fit: contain;
+        }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: sans-serif;
+            font-size: 1.5rem;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading 0%</div>
+    <canvas id="scroll-sequence"></canvas>
+    
+    <script>
+        const canvas = document.getElementById("scroll-sequence");
+        const context = canvas.getContext("2d");
+        const loading = document.getElementById("loading");
+
+        const frameCount = 100;
+        
+        // Frame format: Teaching_000.jpg to Teaching_099.jpg
+        const currentFrame = index => (
+            `./Teaching_${(index - 1).toString().padStart(3, '0')}.jpg`
+        );
+
+        const images = [];
+        let loaded = 0;
+
+        for (let i = 1; i <= frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            img.onload = () => {
+                loaded++;
+                loading.innerText = `Loading ${Math.floor((loaded / frameCount) * 100)}%`;
+                
+                if (loaded === frameCount) {
+                    loading.style.display = 'none';
+                }
+                
+                // Draw the first frame once it's loaded
+                if (i === 1) {
+                    canvas.width = img.naturalWidth || img.width;
+                    canvas.height = img.naturalHeight || img.height;
+                    context.drawImage(img, 0, 0);
+                }
+            };
+            images.push(img);
+        }
+
+        let isScrolling = false;
+
+        window.addEventListener('scroll', () => {  
+            if (!isScrolling) {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = document.documentElement.scrollTop;
+                    const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+                    
+                    // Prevent division by zero
+                    if (maxScrollTop > 0) {
+                        const scrollFraction = scrollTop / maxScrollTop;
+                        // frameIndex should be between 0 and 99
+                        const frameIndex = Math.min(
+                            frameCount - 1,
+                            Math.floor(scrollFraction * frameCount)
+                        );
+                        
+                        updateImage(frameIndex);
+                    }
+                    isScrolling = false;
+                });
+                isScrolling = true;
+            }
+        });
+
+        const updateImage = index => {
+            if (images[index] && images[index].complete) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(images[index], 0, 0);
+            }
+        }
+    </script>
+</body>
+</html>

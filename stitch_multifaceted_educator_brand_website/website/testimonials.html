@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials & Reviews | Ram Saran Yadav</title>
+    <meta name="description" content="Read reviews and testimonials from students, parents, and business clients about Ram Saran Yadav's teaching and United Digital Printing Press services.">
+    <meta name="keywords" content="Ram Saran Yadav Reviews, Student Testimonials, Printing Press Reviews">
+    <meta name="author" content="Ram Saran Yadav">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Testimonials | Ram Saran Yadav">
+    <meta property="og:description" content="Hear what students, parents, and clients have to say.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ramsaran.com/testimonials.html">
+    <meta property="og:image" content="https://ramsaran.com/RAm.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ramsaran.com/testimonials.html">
+    
+    <!-- Tailwind CSS (CDN for Static Phase A) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Material Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                                        colors: {
+                        primary: '#FF7A00', // Neon Orange
+                        secondary: '#FF7A00', // Neon Orange
+                        background: '#0a0a0a', // Deep Black
+                        surface: '#171717', // Dark Grey
+                        'on-surface': '#ffffff',
+                        'on-surface-variant': '#9ca3af'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-secondary selection:text-background">
+
+    <!-- Reusable Navbar Component Injection -->
+    <div data-component="Navbar"></div>
+
+    <main class="pt-24 min-h-screen">
+        
+        <!-- Header Section -->
+        <section class="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="relative z-10 animate-on-scroll">
+                <span class="material-symbols-outlined text-6xl text-white mb-6" style="font-variation-settings: 'FILL' 1;">forum</span>
+                <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6">Words from the Community</h1>
+                <p class="font-body text-xl text-on-surface-variant max-w-2xl mx-auto">
+                    The true measure of success lies in the positive impact made on students, parents, and business partners.
+                </p>
+            </div>
+        </section>
+
+        <!-- Testimonials Masonry Grid -->
+        <section class="py-12 px-6 md:px-16 max-w-7xl mx-auto relative z-20">
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 animate-on-scroll" id="testimonial-filters">
+                <button data-filter="all" class="filter-btn active bg-primary text-white px-5 py-2 rounded-full font-heading font-bold text-sm transition-all shadow-lg">All</button>
+                <button data-filter="students" class="filter-btn glass-panel text-on-surface px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10">Students</button>
+                <button data-filter="parents" class="filter-btn glass-panel text-on-surface px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10">Parents</button>
+                <button data-filter="clients" class="filter-btn glass-panel text-on-surface px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10">Business Clients</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="testimonial-grid">
+                
+                <!-- Student Review 1 -->
+                <div class="glass-panel p-8 rounded-2xl testimonial-card animate-on-scroll border-t-2 border-primary" data-category="students">
+                    <div class="flex text-secondary mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body text-on-surface-variant italic mb-6 leading-relaxed">
+                        "Sir's English classes completely changed my perspective. The grammar notes provided were incredibly structured, making it easy to score an A+ in my final board exams."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">A</div>
+                        <div>
+                            <div class="font-heading font-bold text-white text-sm">Aarav Sharma</div>
+                            <div class="font-body text-xs text-on-surface-variant">Class 12 Student</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Review 1 -->
+                <div class="glass-panel p-8 rounded-2xl testimonial-card animate-on-scroll border-t-2 border-secondary" data-category="clients" style="transition-delay: 100ms;">
+                    <div class="flex text-secondary mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body text-on-surface-variant italic mb-6 leading-relaxed">
+                        "We ordered 5000 brochures and 10 large flex banners for our corporate event. United Digital Printing Press delivered a day early with impeccable color accuracy."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold">M</div>
+                        <div>
+                            <div class="font-heading font-bold text-white text-sm">Manish Tech Ltd.</div>
+                            <div class="font-body text-xs text-on-surface-variant">Corporate Client</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parent Review 1 -->
+                <div class="glass-panel p-8 rounded-2xl testimonial-card animate-on-scroll border-t-2 border-white" data-category="parents" style="transition-delay: 200ms;">
+                    <div class="flex text-secondary mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body text-on-surface-variant italic mb-6 leading-relaxed">
+                        "The discipline and dedication instilled in my daughter are remarkable. Sir doesn't just teach the syllabus; he prepares them for life's challenges."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white font-bold">R</div>
+                        <div>
+                            <div class="font-heading font-bold text-white text-sm">Rita P.</div>
+                            <div class="font-body text-xs text-on-surface-variant">Parent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student Review 2 -->
+                <div class="glass-panel p-8 rounded-2xl testimonial-card animate-on-scroll border-t-2 border-primary" data-category="students">
+                    <div class="flex text-secondary mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+                    </div>
+                    <p class="font-body text-on-surface-variant italic mb-6 leading-relaxed">
+                        "The YouTube video explanations are a lifesaver. I can revise complex grammar rules multiple times before the exams. Highly recommended to all students."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">S</div>
+                        <div>
+                            <div class="font-heading font-bold text-white text-sm">Suman K.</div>
+                            <div class="font-body text-xs text-on-surface-variant">Online Learner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Review 2 -->
+                <div class="glass-panel p-8 rounded-2xl testimonial-card animate-on-scroll border-t-2 border-secondary" data-category="clients" style="transition-delay: 100ms;">
+                    <div class="flex text-secondary mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body text-on-surface-variant italic mb-6 leading-relaxed">
+                        "Their graphic design team completely transformed our school's identity. From ID cards to the prospectus, everything was designed with a premium touch."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold">E</div>
+                        <div>
+                            <div class="font-heading font-bold text-white text-sm">Everest Academy</div>
+                            <div class="font-body text-xs text-on-surface-variant">Education Partner</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Submission Form -->
+        <section class="py-24 bg-surface border-t border-white/5">
+            <div class="max-w-4xl mx-auto px-6 md:px-16 text-center">
+                <h2 class="font-heading text-3xl font-bold text-white mb-6 animate-on-scroll">Share Your Experience</h2>
+                <p class="font-body text-on-surface-variant mb-12 animate-on-scroll">
+                    Have you been a student, parent, or a client of United Digital Printing Press? We'd love to hear your feedback.
+                </p>
+
+                <div class="glass-panel p-8 md:p-12 rounded-[2rem] text-left shadow-2xl animate-on-scroll">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="font-body text-sm font-semibold text-on-surface-variant">Full Name</label>
+                                <input type="text" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl p-3.5 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="font-body text-sm font-semibold text-on-surface-variant">Relationship</label>
+                                <select class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl p-3.5 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required>
+                                    <option>Student</option>
+                                    <option>Parent</option>
+                                    <option>Business Client</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-body text-sm font-semibold text-on-surface-variant">Rating</label>
+                            <div class="flex gap-2 text-on-surface-variant text-2xl cursor-pointer">
+                                <span class="material-symbols-outlined hover:text-secondary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined hover:text-secondary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined hover:text-secondary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined hover:text-secondary transition-colors" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined hover:text-secondary transition-colors">star</span>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="font-body text-sm font-semibold text-on-surface-variant">Your Review</label>
+                            <textarea rows="4" class="w-full bg-[#0a0a0a] border border-white/10 rounded-xl p-3.5 text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" required></textarea>
+                        </div>
+                        <button type="button" class="w-full bg-white text-[#0a0a0a] hover:bg-secondary py-4 rounded-xl font-heading font-bold transition-colors shadow-lg">
+                            Submit Testimonial
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Reusable Footer Component Injection -->
+    <div data-component="Footer"></div>
+
+    <!-- Core Application Script -->
+    <script src="assets/js/app.js"></script>
+    
+    <!-- Filtering Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.testimonial-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update styling
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white', 'shadow-lg');
+                        b.classList.add('glass-panel', 'text-on-surface', 'border', 'border-white/10');
+                    });
+                    btn.classList.add('bg-primary', 'text-white', 'shadow-lg');
+                    btn.classList.remove('glass-panel', 'text-on-surface', 'border', 'border-white/10');
+
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    cards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 50);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(10px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

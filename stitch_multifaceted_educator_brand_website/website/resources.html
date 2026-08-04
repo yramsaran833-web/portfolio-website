@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Resources | Ram Saran Yadav</title>
+    <meta name="description" content="Download study materials, grammar notes, assignments, and past question papers provided by Ram Saran Yadav.">
+    <meta name="keywords" content="Student Resources, Grammar Notes, English Exam Papers, Download PDF Notes">
+    <meta name="author" content="Ram Saran Yadav">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Student Resources & Study Materials">
+    <meta property="og:description" content="Access free grammar notes, assignments, and exam prep materials.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ramsaran.com/resources.html">
+    <meta property="og:image" content="https://ramsaran.com/RAm.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ramsaran.com/resources.html">
+    
+    <!-- Tailwind CSS (CDN for Static Phase A) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Material Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                                        colors: {
+                        primary: '#FF7A00', // Neon Orange
+                        secondary: '#FF7A00', // Neon Orange
+                        background: '#0a0a0a', // Deep Black
+                        surface: '#171717', // Dark Grey
+                        'on-surface': '#ffffff',
+                        'on-surface-variant': '#9ca3af'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-secondary selection:text-background">
+
+    <!-- Reusable Navbar Component Injection -->
+    <div data-component="Navbar"></div>
+
+    <main class="pt-24 min-h-screen">
+        
+        <!-- Header Section -->
+        <section class="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+            <div class="relative z-10 animate-on-scroll">
+                <span class="material-symbols-outlined text-6xl text-secondary mb-6">folder_open</span>
+                <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6">Study Materials</h1>
+                <p class="font-body text-xl text-on-surface-variant max-w-2xl mx-auto mb-10">
+                    Comprehensive notes, assignments, and exam preparation resources tailored for academic success.
+                </p>
+                
+                <!-- Search Bar UI -->
+                <div class="max-w-xl mx-auto relative shadow-2xl">
+                    <input type="text" placeholder="Search for notes, chapters, or topics..." class="w-full bg-surface border border-white/20 rounded-full py-4 pl-12 pr-6 text-white focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="py-12 px-6 md:px-16 max-w-7xl mx-auto relative z-20">
+            <div class="flex flex-col lg:flex-row gap-12">
+                
+                <!-- Sidebar: Subject Filters -->
+                <aside class="lg:w-1/4 shrink-0 animate-on-scroll">
+                    <div class="glass-panel p-6 rounded-2xl sticky top-28">
+                        <h3 class="font-heading font-bold text-white mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">filter_list</span> Subjects
+                        </h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <button class="w-full text-left bg-primary/20 text-white font-bold px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
+                                    English Grammar <span class="text-xs bg-primary px-2 py-0.5 rounded">12</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left hover:bg-white/5 text-on-surface-variant hover:text-white px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
+                                    Literature Summaries <span class="text-xs bg-white/10 px-2 py-0.5 rounded">8</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left hover:bg-white/5 text-on-surface-variant hover:text-white px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
+                                    Past Exam Papers <span class="text-xs bg-white/10 px-2 py-0.5 rounded">15</span>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full text-left hover:bg-white/5 text-on-surface-variant hover:text-white px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
+                                    Assignments <span class="text-xs bg-white/10 px-2 py-0.5 rounded">4</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <!-- Grid of Download Cards -->
+                <div class="lg:w-3/4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- Resource Card 1 -->
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-secondary/50 transition-colors group animate-on-scroll">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-[#f40f02]/10 text-[#f40f02] flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-2xl">picture_as_pdf</span>
+                                </div>
+                                <span class="text-xs font-bold bg-white/5 px-2 py-1 rounded text-on-surface-variant">2.4 MB</span>
+                            </div>
+                            <h4 class="font-heading font-bold text-white mb-2 group-hover:text-secondary transition-colors">Tense & Voice Rules</h4>
+                            <p class="font-body text-xs text-on-surface-variant mb-6 line-clamp-2">Complete guide to English tenses and active/passive voice conversions with examples.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfViewer()" class="flex-1 bg-white/5 hover:bg-white/10 text-white py-2 rounded-lg font-heading text-xs font-bold transition-colors">Preview</button>
+                                <button class="flex-1 bg-secondary text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-[16px]">download</span> Download
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource Card 2 -->
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-secondary/50 transition-colors group animate-on-scroll" style="transition-delay: 100ms;">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-[#f40f02]/10 text-[#f40f02] flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-2xl">picture_as_pdf</span>
+                                </div>
+                                <span class="text-xs font-bold bg-white/5 px-2 py-1 rounded text-on-surface-variant">1.8 MB</span>
+                            </div>
+                            <h4 class="font-heading font-bold text-white mb-2 group-hover:text-secondary transition-colors">Direct & Indirect Speech</h4>
+                            <p class="font-body text-xs text-on-surface-variant mb-6 line-clamp-2">Comprehensive rules for narration change commonly tested in board exams.</p>
+                            <div class="flex gap-2">
+                                <button onclick="openPdfViewer()" class="flex-1 bg-white/5 hover:bg-white/10 text-white py-2 rounded-lg font-heading text-xs font-bold transition-colors">Preview</button>
+                                <button class="flex-1 bg-secondary text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-[16px]">download</span> Download
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource Card 3 (DOCX) -->
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-primary/50 transition-colors group animate-on-scroll" style="transition-delay: 200ms;">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-[#1877f2]/10 text-[#1877f2] flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-2xl">description</span>
+                                </div>
+                                <span class="text-xs font-bold bg-white/5 px-2 py-1 rounded text-on-surface-variant">500 KB</span>
+                            </div>
+                            <h4 class="font-heading font-bold text-white mb-2 group-hover:text-primary transition-colors">Essay Writing Templates</h4>
+                            <p class="font-body text-xs text-on-surface-variant mb-6 line-clamp-2">Structure templates and vocabulary lists for high-scoring essays.</p>
+                            <div class="flex gap-2">
+                                <button class="w-full bg-primary text-white py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-[16px]">download</span> Download DOCX
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resource Card 4 (ZIP) -->
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-white/50 transition-colors group animate-on-scroll" style="transition-delay: 300ms;">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-2xl">folder_zip</span>
+                                </div>
+                                <span class="text-xs font-bold bg-white/5 px-2 py-1 rounded text-on-surface-variant">15 MB</span>
+                            </div>
+                            <h4 class="font-heading font-bold text-white mb-2 group-hover:text-white transition-colors">Past Papers (2018-2022)</h4>
+                            <p class="font-body text-xs text-on-surface-variant mb-6 line-clamp-2">A complete collection of previous year question papers for final prep.</p>
+                            <div class="flex gap-2">
+                                <button class="w-full bg-white text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-90 flex items-center justify-center gap-1">
+                                    <span class="material-symbols-outlined text-[16px]">download</span> Download ZIP
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Pagination (Mock) -->
+                    <div class="flex justify-center gap-2 pt-12 animate-on-scroll">
+                        <button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-white font-bold shadow-lg shadow-primary/30">1</button>
+                        <button class="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 hover:bg-white/10 text-white transition-colors font-bold">2</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Reusable Footer Component Injection -->
+    <div data-component="Footer"></div>
+
+    <!-- PDF Viewer Modal (Mockup UI) -->
+    <div id="pdf-viewer-modal" class="fixed inset-0 z-[100] bg-background/95 backdrop-blur-md hidden flex-col">
+        <!-- Toolbar -->
+        <div class="h-16 bg-surface border-b border-white/10 flex items-center justify-between px-6 shrink-0">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-[#f40f02]">picture_as_pdf</span>
+                <span class="font-heading font-bold text-white text-sm">Tense & Voice Rules.pdf</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-on-surface-variant hover:text-white transition-colors" aria-label="Zoom Out"><span class="material-symbols-outlined">zoom_out</span></button>
+                <span class="text-xs text-on-surface-variant font-bold">100%</span>
+                <button class="text-on-surface-variant hover:text-white transition-colors" aria-label="Zoom In"><span class="material-symbols-outlined">zoom_in</span></button>
+                <div class="w-px h-6 bg-white/10 mx-2"></div>
+                <button class="bg-secondary text-[#0a0a0a] px-4 py-1.5 rounded flex items-center gap-1 font-bold text-xs hover:brightness-110">
+                    <span class="material-symbols-outlined text-[16px]">download</span> Save
+                </button>
+                <button onclick="closePdfViewer()" class="text-white hover:text-[#f40f02] transition-colors ml-4" aria-label="Close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+        <!-- Viewer Content Area (Placeholder) -->
+        <div class="flex-1 overflow-auto flex justify-center p-8">
+            <!-- Simulated PDF Page -->
+            <div class="w-full max-w-3xl bg-white min-h-[1056px] shadow-2xl rounded p-12 text-[#0a0a0a] relative flex flex-col items-center justify-center border border-gray-300">
+                <span class="material-symbols-outlined text-6xl text-gray-300 mb-4">picture_as_pdf</span>
+                <h2 class="font-heading text-2xl font-bold mb-2">Tense & Voice Rules</h2>
+                <p class="font-body text-gray-500">PDF Viewer Component (Phase A Mockup)</p>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-100 opacity-50 pointer-events-none"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Application Script -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- Specific Page Script -->
+    <script>
+        function openPdfViewer() {
+            const modal = document.getElementById('pdf-viewer-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfViewer() {
+            const modal = document.getElementById('pdf-viewer-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>
