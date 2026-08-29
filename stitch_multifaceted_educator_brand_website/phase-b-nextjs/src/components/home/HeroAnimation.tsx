@@ -172,7 +172,7 @@ export default function HeroAnimation() {
       {/* Content Overlay: Left and Right */}
       <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col justify-end md:justify-between md:flex-row items-start md:items-end pb-24 md:pb-32 h-full gap-8">
         {/* Left Side Content */}
-        <div className="w-full md:w-5/12 lg:w-4/12 flex flex-col items-start animate-on-scroll is-visible">
+        <div className="w-full md:w-5/12 lg:w-4/12 flex flex-col items-start animate-on-scroll">
           <div className="inline-flex items-center gap-3 px-5 py-2 glass-panel rounded-full mb-6 border border-white/10 shadow-[0_0_15px_rgba(255,122,0,0.3)]">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
             <span className="text-sm font-accent text-primary capitalize tracking-wider font-light italic">
@@ -196,7 +196,7 @@ export default function HeroAnimation() {
 
         {/* Right Side Content */}
         <div
-          className="w-full md:w-5/12 flex flex-col items-start md:items-end text-left md:text-right animate-on-scroll is-visible"
+          className="w-full md:w-5/12 flex flex-col items-start md:items-end text-left md:text-right animate-on-scroll"
           style={{ transitionDelay: "200ms" }}
         >
           <div className="glass-panel p-3 md:p-4 rounded-xl border-l-4 border-l-primary mb-6 w-full max-w-[250px] ml-auto backdrop-blur-3xl shadow-lg">

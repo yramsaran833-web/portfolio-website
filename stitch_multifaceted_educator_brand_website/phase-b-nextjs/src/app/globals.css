@@ -10,10 +10,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-  --font-accent: var(--font-accent);
-  --font-special: var(--font-special);
+  --font-heading: 'Azurio', sans-serif;
+  --font-body: 'Goga', sans-serif;
+  --font-accent: 'Emilio', serif;
+  --font-special: 'Remixa', sans-serif;
   --color-primary: #FF7A00;
   --color-secondary: #FF7A00;
   --color-surface: #171717;
@@ -90,8 +90,8 @@
   --sidebar-ring: oklch(0.556 0 0);
 
   /* Fonts */
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Azurio', sans-serif;
+  --font-body: 'Goga', sans-serif;
   --font-accent: 'Emilio', serif;
   --font-special: 'Remixa', sans-serif;
 }
@@ -152,9 +152,6 @@
     --color-gold: #FF7A00;
     --color-text-main: #ffffff;
     --color-text-muted: #9ca3af;
-    
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Inter', sans-serif;
     
     --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);

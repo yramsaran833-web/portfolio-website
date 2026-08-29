@@ -18,7 +18,7 @@ export default function Home() {
 
       {/* MODULE: The 3 Pillars (Bento Grid) */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto relative z-20">
-        <div className="text-center mb-16 animate-on-scroll is-visible">
+        <div className="text-center mb-16 animate-on-scroll">
           <h2 className="font-heading text-sm text-primary uppercase tracking-widest font-bold mb-4">
             Multifaceted Career
           </h2>
@@ -31,7 +31,7 @@ export default function Home() {
           {/* Pillar 1 */}
           <Link
             href="/teaching"
-            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll is-visible"
+            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll"
           >
             <Image
               src="/assets/img/Teaching_Hero.jpg"
@@ -56,7 +56,7 @@ export default function Home() {
           {/* Pillar 2 */}
           <Link
             href="/printing"
-            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll is-visible"
+            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll"
             style={{ transitionDelay: "100ms" }}
           >
             <Image
@@ -82,7 +82,7 @@ export default function Home() {
           {/* Pillar 3 */}
           <Link
             href="/creator"
-            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll is-visible"
+            className="group relative aspect-square md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-primary/50 transition-colors animate-on-scroll"
             style={{ transitionDelay: "200ms" }}
           >
             <Image
@@ -111,7 +111,7 @@ export default function Home() {
       <section className="py-20 relative overflow-hidden border-y border-white/5 bg-surface/50">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
         <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10 text-center">
-          <div className="animate-on-scroll is-visible">
+          <div className="animate-on-scroll">
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
               <span className="stat-counter">10</span>
               <span className="text-primary">+</span>
@@ -121,7 +121,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="animate-on-scroll is-visible"
+            className="animate-on-scroll"
             style={{ transitionDelay: "100ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
@@ -133,7 +133,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="animate-on-scroll is-visible"
+            className="animate-on-scroll"
             style={{ transitionDelay: "200ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
@@ -145,7 +145,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="animate-on-scroll is-visible"
+            className="animate-on-scroll"
             style={{ transitionDelay: "300ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
@@ -161,7 +161,7 @@ export default function Home() {
 
       {/* MODULE: Featured Biography Video */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll is-visible">
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
           <h2 className="font-heading text-sm text-primary uppercase tracking-widest font-bold mb-4">
             Biography
           </h2>
@@ -185,7 +185,7 @@ export default function Home() {
         </div>
 
         <div
-          className="w-full max-w-6xl mx-auto animate-on-scroll is-visible"
+          className="w-full max-w-6xl mx-auto animate-on-scroll"
           style={{ transitionDelay: "200ms" }}
         >
           {/* Note: In React, we usually use state to load an iframe onClick instead of innerHTML.
@@ -221,7 +221,7 @@ export default function Home() {
 
       {/* MODULE: Personal Gallery Preview */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5">
-        <div className="flex justify-between items-end mb-12 animate-on-scroll is-visible">
+        <div className="flex justify-between items-end mb-12 animate-on-scroll">
           <div>
             <h2 className="font-heading text-sm text-primary uppercase tracking-widest font-bold mb-2">
               Life & Work
@@ -239,7 +239,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 animate-on-scroll is-visible">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 animate-on-scroll">
           <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative">
             <Image
               src="/assets/img/gallery/gallery_1.jpg"
@@ -283,13 +283,13 @@ export default function Home() {
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto bg-surface/30 rounded-3xl border border-white/5 mb-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-        <div className="text-center mb-16 animate-on-scroll is-visible">
+        <div className="text-center mb-16 animate-on-scroll">
           <h3 className="font-heading text-4xl font-bold text-white">
             Latest Updates & Resources
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 animate-on-scroll is-visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10 animate-on-scroll">
           {/* Blog Preview Card */}
           <Link
             href="/blog"
@@ -354,7 +354,7 @@ export default function Home() {
       <section className="py-32 relative text-center overflow-hidden">
         <div className="absolute inset-0 bg-primary/20"></div>
         <div className="absolute inset-0 backdrop-blur-3xl"></div>
-        <div className="relative z-10 max-w-3xl mx-auto px-6 animate-on-scroll is-visible">
+        <div className="relative z-10 max-w-3xl mx-auto px-6 animate-on-scroll">
           <h2 className="font-heading font-bold text-4xl md:text-7xl text-white mb-8 tracking-tighter">
             Let&apos;s Create<br />Something Great.
           </h2>
