@@ -158,7 +158,7 @@
 }
 
 * {
-    /* removed cursor: none !important; */
+    cursor: auto !important; /* FORCED FIX FOR CURSOR BUG */
 }
 
 html {
