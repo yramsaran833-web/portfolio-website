@@ -103,9 +103,13 @@ export async function uploadGalleryImage(formData: FormData) {
   const fileExt = file.name.split('.').pop()
   const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
 
-  const { data, error } = await supabase.storage.from('gallery').upload(fileName, file, {
+  const arrayBuffer = await file.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+
+  const { data, error } = await supabase.storage.from('gallery').upload(fileName, buffer, {
     cacheControl: '3600',
-    upsert: false
+    upsert: false,
+    contentType: file.type
   })
 
   if (error) {

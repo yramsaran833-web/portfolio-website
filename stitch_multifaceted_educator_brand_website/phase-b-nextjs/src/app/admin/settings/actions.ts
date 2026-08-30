@@ -1,4 +1,4 @@
-﻿'use server'
+'use server'
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
@@ -31,7 +31,13 @@ export async function uploadSettingImage(formData: FormData, field: string) {
   const fileExt = file.name.split('.').pop()
   const fileName = `${field}-${Date.now()}.${fileExt}`
 
-  const { data, error } = await supabase.storage.from('site_settings').upload(fileName, file, { upsert: false })
+  const arrayBuffer = await file.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+  
+  const { data, error } = await supabase.storage.from('site_settings').upload(fileName, buffer, { 
+    upsert: false,
+    contentType: file.type 
+  })
   if (error) return { error: error.message }
   
   const { data: p } = supabase.storage.from('site_settings').getPublicUrl(data.path)

@@ -1,4 +1,4 @@
-﻿'use server'
+'use server'
 
 import { createClient } from '@/lib/supabase/server'
 import { resourceSchema, type ResourceFormValues } from '@/lib/validations/resources'
@@ -63,9 +63,13 @@ export async function uploadResourceFile(formData: FormData) {
   const fileExt = file.name.split('.').pop()
   const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
 
-  const { data, error } = await supabase.storage.from('resources').upload(fileName, file, {
+  const arrayBuffer = await file.arrayBuffer()
+  const buffer = Buffer.from(arrayBuffer)
+
+  const { data, error } = await supabase.storage.from('resources').upload(fileName, buffer, {
     cacheControl: '3600',
-    upsert: false
+    upsert: false,
+    contentType: file.type
   })
 
   if (error) return { error: error.message }
