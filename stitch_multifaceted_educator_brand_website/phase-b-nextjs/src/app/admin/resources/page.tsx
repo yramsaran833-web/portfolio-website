@@ -1,4 +1,4 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Plus, Search, Edit } from 'lucide-react'
 import { DeleteResourceButton } from './DeleteResourceButton'
@@ -37,7 +37,6 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
               <tr>
                 <th className="px-6 py-3">Title</th>
                 <th className="px-6 py-3">Category</th>
-                <th className="px-6 py-3">Public</th>
                 <th className="px-6 py-3">Date</th>
                 <th className="px-6 py-3 text-right">Actions</th>
               </tr>
@@ -47,7 +46,6 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
                   <tr key={r.id} className="border-b border-gray-800 hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4 font-medium text-white">{r.title}</td>
                     <td className="px-6 py-4">{r.resource_categories?.name || '-'}</td>
-                    <td className="px-6 py-4">{r.is_public ? 'Yes' : 'No'}</td>
                     <td className="px-6 py-4">{new Date(r.created_at).toLocaleDateString()}</td>
                     <td className="px-6 py-4 text-right flex justify-end gap-3">
                       <a href={r.file_url} target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors text-xs">View</a>
@@ -55,7 +53,7 @@ export default async function ResourcesPage({ searchParams }: { searchParams: Pr
                       <DeleteResourceButton id={r.id} />
                     </td>
                   </tr>
-                )) : <tr><td colSpan={5} className="px-6 py-8 text-center text-gray-500">No resources found.</td></tr>}
+                )) : <tr><td colSpan={4} className="px-6 py-8 text-center text-gray-500">No resources found.</td></tr>}
             </tbody>
           </table>
         </div>

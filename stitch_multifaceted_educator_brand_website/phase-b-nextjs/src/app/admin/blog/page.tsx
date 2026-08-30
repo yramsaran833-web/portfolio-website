@@ -19,7 +19,7 @@ export default async function BlogManagementPage({
     dbQuery = dbQuery.ilike('title', `%${query}%`)
   }
   if (status && status !== 'all') {
-    dbQuery = dbQuery.eq('status', status)
+    dbQuery = dbQuery.eq('published', status === 'published')
   }
 
   const { data: posts } = await dbQuery
@@ -89,11 +89,9 @@ export default async function BlogManagementPage({
                     <td className="px-6 py-4">{post.blog_categories?.name || 'Uncategorized'}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 rounded-full text-xs ${
-                        post.status === 'published' ? 'bg-green-500/10 text-green-500' :
-                        post.status === 'draft' ? 'bg-gray-500/10 text-gray-400' :
-                        'bg-blue-500/10 text-blue-500'
+                        post.published ? 'bg-green-500/10 text-green-500' : 'bg-gray-500/10 text-gray-400'
                       }`}>
-                        {post.status.toUpperCase()}
+                        {post.published ? 'PUBLISHED' : 'DRAFT'}
                       </span>
                     </td>
                     <td className="px-6 py-4">{new Date(post.created_at).toLocaleDateString()}</td>

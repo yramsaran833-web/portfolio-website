@@ -14,13 +14,10 @@ export default async function GalleryManagementPage({
   const supabase = await createClient()
   const { query, status } = await searchParams
 
-  let dbQuery = supabase.from('gallery_items').select('*, gallery_albums(title)').order('created_at', { ascending: false })
+  let dbQuery = supabase.from('gallery_items').select('*, gallery_albums(name)').order('created_at', { ascending: false })
 
   if (query) {
     dbQuery = dbQuery.ilike('title', `%${query}%`)
-  }
-  if (status && status !== 'all') {
-    dbQuery = dbQuery.eq('status', status)
   }
 
   const { data: items } = await dbQuery
@@ -55,15 +52,7 @@ export default async function GalleryManagementPage({
           </form>
           <form className="flex items-center gap-2">
             {query && <input type="hidden" name="query" value={query} />}
-            <select 
-              name="status" 
-              defaultValue={status || 'all'}
-              className="bg-[#0a0f1d] border border-gray-800 rounded-md py-1.5 px-3 text-sm text-white focus:outline-none focus:border-[#d4af37]"
-            >
-              <option value="all">All Status</option>
-              <option value="published">Published</option>
-              <option value="unpublished">Unpublished</option>
-            </select>
+            <input type="hidden" name="status" value="all" />
             <button type="submit" className="bg-[#d4af37] text-black px-3 py-1.5 rounded-md text-sm font-medium hover:bg-[#d4af37]/90 transition-colors">
               Filter
             </button>
@@ -78,7 +67,6 @@ export default async function GalleryManagementPage({
                 <th className="px-6 py-3">Thumbnail</th>
                 <th className="px-6 py-3">Title</th>
                 <th className="px-6 py-3">Album</th>
-                <th className="px-6 py-3">Status</th>
                 <th className="px-6 py-3">Date</th>
                 <th className="px-6 py-3 text-right">Actions</th>
               </tr>
@@ -93,14 +81,7 @@ export default async function GalleryManagementPage({
                       </div>
                     </td>
                     <td className="px-6 py-4 font-medium text-white">{item.title || 'Untitled'}</td>
-                    <td className="px-6 py-4">{item.gallery_albums?.title || 'No Album'}</td>
-                    <td className="px-6 py-4">
-                      <span className={`px-2 py-1 rounded-full text-xs ${
-                        item.status === 'published' ? 'bg-green-500/10 text-green-500' : 'bg-gray-500/10 text-gray-400'
-                      }`}>
-                        {item.status.toUpperCase()}
-                      </span>
-                    </td>
+                    <td className="px-6 py-4">{item.gallery_albums?.name || 'No Album'}</td>
                     <td className="px-6 py-4">{new Date(item.created_at).toLocaleDateString()}</td>
                     <td className="px-6 py-4 text-right flex justify-end items-center gap-3 pt-6">
                       <Link href={`/admin/gallery/${item.id}/edit`} className="text-gray-400 hover:text-white transition-colors" title="Edit">
