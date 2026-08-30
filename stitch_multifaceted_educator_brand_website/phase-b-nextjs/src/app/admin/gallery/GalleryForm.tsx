@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { galleryItemSchema, type GalleryItemFormValues } from '@/lib/validations/gallery'
-import { createGalleryItem, updateGalleryItem, uploadGalleryImage } from './actions'
-import { Loader2, Image as ImageIcon } from 'lucide-react'
+import { createGalleryItem, updateGalleryItem, uploadGalleryImage, createMultipleGalleryItems } from './actions'
+import { Loader2, Image as ImageIcon, X } from 'lucide-react'
 import Image from 'next/image'
 
 interface GalleryFormProps {
@@ -16,7 +16,7 @@ interface GalleryFormProps {
 export function GalleryForm({ initialData, albums }: GalleryFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.image_url || null)
+  const [imagePreviews, setImagePreviews] = useState<string[]>(initialData?.image_url ? [initialData.image_url] : [])
   const [uploadingImage, setUploadingImage] = useState(false)
 
   const form = useForm({
@@ -29,31 +29,38 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
   })
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const files = Array.from(e.target.files || [])
+    if (files.length === 0) return
 
     setUploadingImage(true)
-    const formData = new FormData()
-    formData.append('image', file)
+    const newPreviews = [...imagePreviews]
 
-    const res = await uploadGalleryImage(formData)
-    setUploadingImage(false)
+    for (const file of files) {
+      const formData = new FormData()
+      formData.append('image', file)
 
-    if (res.error) {
-      alert(res.error)
-    } else if (res.url) {
-      setImagePreview(res.url)
-      form.setValue('image_url', res.url)
+      const res = await uploadGalleryImage(formData)
+      if (res.error) {
+        alert(res.error)
+      } else if (res.url) {
+        newPreviews.push(res.url)
+      }
+    }
+
+    setImagePreviews(newPreviews)
+    if (newPreviews.length > 0) {
+      form.setValue('image_url', newPreviews[0]) // just to satisfy form schema
       form.clearErrors('image_url')
     }
+    setUploadingImage(false)
   }
 
   async function onSubmit(data: GalleryItemFormValues) {
     setIsSubmitting(true)
     setErrorMsg('')
     
-    if (!data.image_url) {
-      form.setError('image_url', { message: 'Image is required' })
+    if (imagePreviews.length === 0) {
+      form.setError('image_url', { message: 'At least one image is required' })
       setIsSubmitting(false)
       return
     }
@@ -62,9 +69,16 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
 
     let res
     if (initialData?.id) {
+      // Editing: Only use the first image
+      data.image_url = imagePreviews[0]
       res = await updateGalleryItem(initialData.id, data)
     } else {
-      res = await createGalleryItem(data)
+      // Creating: Can upload multiple
+      const itemsToCreate = imagePreviews.map(url => ({
+        ...data,
+        image_url: url
+      }))
+      res = await createMultipleGalleryItems(itemsToCreate)
     }
 
     if (res?.error) {
@@ -89,21 +103,32 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
           <div className="bg-[#050812] border border-gray-800 rounded-lg p-6 space-y-4">
             <h3 className="font-medium text-white border-b border-gray-800 pb-2 mb-4">Image File</h3>
             <div className="space-y-4">
-              {imagePreview ? (
-                <div className="relative aspect-video rounded-md overflow-hidden bg-gray-900 border border-gray-800 max-w-lg">
-                  <Image src={imagePreview} alt="Preview" fill className="object-contain" />
-                  <button 
-                    type="button" 
-                    onClick={() => { setImagePreview(null); form.setValue('image_url', '') }}
-                    className="absolute top-2 right-2 bg-black/50 hover:bg-black/80 text-white text-xs px-2 py-1 rounded"
-                  >
-                    Remove
-                  </button>
+              {imagePreviews.length > 0 && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                  {imagePreviews.map((preview, idx) => (
+                    <div key={idx} className="relative aspect-square rounded-md overflow-hidden bg-gray-900 border border-gray-800">
+                      <Image src={preview} alt="Preview" fill className="object-cover" />
+                      <button 
+                        type="button" 
+                        onClick={() => { 
+                          const newPreviews = [...imagePreviews];
+                          newPreviews.splice(idx, 1);
+                          setImagePreviews(newPreviews);
+                          if (newPreviews.length === 0) form.setValue('image_url', '');
+                        }}
+                        className="absolute top-2 right-2 bg-black/70 hover:bg-black text-white p-1 rounded-full"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              ) : (
+              )}
+              
+              {imagePreviews.length === 0 && (
                 <div className="aspect-video max-w-lg rounded-md bg-[#0a0f1d] border border-gray-800 border-dashed flex flex-col items-center justify-center text-gray-500">
                   <ImageIcon className="h-10 w-10 mb-2 opacity-50" />
-                  <span className="text-sm">Select an image to upload</span>
+                  <span className="text-sm">Select images to upload</span>
                 </div>
               )}
               
@@ -113,9 +138,19 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
               <input type="hidden" {...form.register('image_url')} />
               
               <label className="inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-md cursor-pointer transition-colors">
-                {uploadingImage ? 'Uploading...' : 'Choose File'}
-                <input type="file" accept="image/*" className="hidden" disabled={uploadingImage} onChange={handleImageUpload} />
+                {uploadingImage ? 'Uploading...' : 'Choose Files'}
+                <input 
+                  type="file" 
+                  accept="image/*" 
+                  multiple={!initialData?.id} 
+                  className="hidden" 
+                  disabled={uploadingImage} 
+                  onChange={handleImageUpload} 
+                />
               </label>
+              {!initialData?.id && (
+                <p className="text-xs text-gray-500 mt-2">You can select multiple photos at once.</p>
+              )}
             </div>
           </div>
 

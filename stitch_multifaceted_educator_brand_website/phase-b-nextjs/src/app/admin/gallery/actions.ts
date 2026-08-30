@@ -1,4 +1,4 @@
-﻿'use server'
+'use server'
 
 import { createClient } from '@/lib/supabase/server'
 import { galleryItemSchema, type GalleryItemFormValues } from '@/lib/validations/gallery'
@@ -19,6 +19,32 @@ export async function createGalleryItem(data: GalleryItemFormValues) {
   }
 
   const { error } = await supabase.from('gallery_items').insert(parsed.data)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/admin/gallery')
+  redirect('/admin/gallery')
+}
+
+export async function createMultipleGalleryItems(dataArray: GalleryItemFormValues[]) {
+  const supabase = await createClient()
+  
+  const { data: user, error: authError } = await supabase.auth.getUser()
+  if (authError || !user?.user) {
+    return { error: 'Unauthorized' }
+  }
+
+  // Validate all
+  const parsedArray = []
+  for (const data of dataArray) {
+    const parsed = galleryItemSchema.safeParse(data)
+    if (!parsed.success) return { error: 'Invalid form data in one of the items' }
+    parsedArray.push(parsed.data)
+  }
+
+  const { error } = await supabase.from('gallery_items').insert(parsedArray)
 
   if (error) {
     return { error: error.message }
