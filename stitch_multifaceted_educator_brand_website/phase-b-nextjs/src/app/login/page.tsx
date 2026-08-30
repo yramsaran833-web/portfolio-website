@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { loginAction } from './actions'
@@ -26,7 +26,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#0a0f1d] text-white">
       <div className="bg-[#050812] border border-gray-800 p-8 rounded-lg w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-[#d4af37]">RSY ADMIN</h1>
+          <h1 className="text-2xl font-bold text-[#d4af37]">RAM SARAN YADAV ADMIN</h1>
           <p className="text-gray-400 text-sm mt-2">Sign in to access the dashboard</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">

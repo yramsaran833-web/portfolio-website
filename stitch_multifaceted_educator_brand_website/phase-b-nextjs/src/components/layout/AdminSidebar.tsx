@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -12,8 +12,10 @@ import {
   Mail,
   Calendar,
   FolderDown, 
-  Settings 
+  Settings,
+  LogOut
 } from 'lucide-react';
+import { logoutAction } from '@/app/login/actions';
 
 const navItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -33,7 +35,7 @@ export function AdminSidebar() {
   return (
     <aside className="w-64 bg-[#050812] border-r border-gray-800 hidden md:flex flex-col">
       <div className="h-16 flex items-center px-6 border-b border-gray-800">
-        <h1 className="text-[#d4af37] font-bold text-lg tracking-wider">RSY ADMIN</h1>
+        <h1 className="text-[#d4af37] font-bold text-lg tracking-wider">RAM SARAN YADAV</h1>
       </div>
       <nav className="flex-1 py-6 px-3 space-y-1">
         {navItems.map((item) => {
@@ -64,7 +66,16 @@ export function AdminSidebar() {
           );
         })}
       </nav>
-      <div className="p-4 border-t border-gray-800">
+      <div className="p-4 border-t border-gray-800 space-y-4">
+        <button 
+          onClick={async () => {
+            await logoutAction();
+          }}
+          className="flex w-full items-center px-3 py-2.5 rounded-md text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-400/10 transition-colors"
+        >
+          <LogOut className="mr-3 h-5 w-5" />
+          Logout
+        </button>
         <div className="text-xs text-gray-500">Ram Saran Yadav &copy; 2026</div>
       </div>
     </aside>
