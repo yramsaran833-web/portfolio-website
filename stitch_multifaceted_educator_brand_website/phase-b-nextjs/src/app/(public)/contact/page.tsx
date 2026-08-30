@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { submitContactForm } from "./actions";
 
 // export const metadata = {
 //   title: "Contact Ram Saran Yadav | Let's Connect",
@@ -11,7 +11,6 @@ import { createClient } from "@/lib/supabase/client";
 // };
 
 export default function ContactPage() {
-  const supabase = createClient();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
@@ -23,16 +22,10 @@ export default function ContactPage() {
     const formData = new FormData(e.currentTarget);
     
     try {
-      const { error } = await supabase
-        .from("contact_messages")
-        .insert({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          subject: formData.get("subject"),
-          message: formData.get("message"),
-        });
+      const result = await submitContactForm(formData);
 
-      if (error) throw error;
+      if (!result.success) throw new Error(result.error);
+      
       setSubmitStatus("success");
       (e.target as HTMLFormElement).reset();
     } catch (error) {
