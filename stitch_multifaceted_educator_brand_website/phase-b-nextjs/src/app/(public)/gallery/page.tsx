@@ -14,7 +14,7 @@ export default async function GalleryPage() {
   // Fetch gallery items
   const { data: galleryItems } = await supabase
     .from("gallery_items")
-    .select("*, gallery_albums(name)")
+    .select("*, gallery_albums(title)")
     .order("created_at", { ascending: false });
 
   // Fetch albums
@@ -84,7 +84,7 @@ export default async function GalleryPage() {
         >
           {galleryItems && galleryItems.length > 0 ? (
             galleryItems.map((item) => (
-              <div key={item.id} className="masonry-item" data-category={item.gallery_albums ? (item.gallery_albums as any).name.toLowerCase() : 'all'}>
+              <div key={item.id} className="masonry-item" data-category={item.gallery_albums ? (item.gallery_albums as any).title?.toLowerCase() : 'all'}>
                 <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
                   <img
                     src={item.image_url}
@@ -96,8 +96,7 @@ export default async function GalleryPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                     {item.gallery_albums && (
                       <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                        {/* @ts-ignore */}
-                        {(item.gallery_albums as any).name}
+                        {(item.gallery_albums as any).title}
                       </span>
                     )}
                     <h4 className="font-heading font-bold text-white text-lg">

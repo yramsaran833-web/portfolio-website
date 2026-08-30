@@ -14,7 +14,7 @@ export default async function GalleryManagementPage({
   const supabase = await createClient()
   const { query, status } = await searchParams
 
-  let dbQuery = supabase.from('gallery_items').select('*, gallery_albums(name)').order('created_at', { ascending: false })
+  let dbQuery = supabase.from('gallery_items').select('*, gallery_albums(title)').order('created_at', { ascending: false })
 
   if (query) {
     dbQuery = dbQuery.ilike('title', `%${query}%`)
@@ -81,7 +81,7 @@ export default async function GalleryManagementPage({
                       </div>
                     </td>
                     <td className="px-6 py-4 font-medium text-white">{item.title || 'Untitled'}</td>
-                    <td className="px-6 py-4">{item.gallery_albums?.name || 'No Album'}</td>
+                    <td className="px-6 py-4">{item.gallery_albums?.title || 'No Album'}</td>
                     <td className="px-6 py-4">{new Date(item.created_at).toLocaleDateString()}</td>
                     <td className="px-6 py-4 text-right flex justify-end items-center gap-3 pt-6">
                       <Link href={`/admin/gallery/${item.id}/edit`} className="text-gray-400 hover:text-white transition-colors" title="Edit">

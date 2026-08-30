@@ -40,8 +40,15 @@ export async function createMultipleGalleryItems(dataArray: GalleryItemFormValue
   const parsedArray = []
   for (const data of dataArray) {
     const parsed = galleryItemSchema.safeParse(data)
-    if (!parsed.success) return { error: 'Invalid form data in one of the items' }
-    parsedArray.push(parsed.data)
+    if (!parsed.success) {
+      return { error: 'Invalid data: ' + parsed.error.issues.map(i => i.path + ': ' + i.message).join(', ') }
+    }
+    
+    // Explicitly set empty strings to null for UUID fields to avoid Postgres errors
+    const item = parsed.data;
+    if (item.album_id === '') item.album_id = null;
+    
+    parsedArray.push(item)
   }
 
   const { error } = await supabase.from('gallery_items').insert(parsedArray)
