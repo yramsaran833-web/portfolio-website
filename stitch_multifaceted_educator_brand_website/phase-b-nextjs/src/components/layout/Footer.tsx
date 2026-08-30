@@ -90,6 +90,15 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/awards"
+                  className="font-body text-sm text-white-variant hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <span className="w-1 h-1 rounded-full bg-primary opacity-0 hover:opacity-100 transition-opacity"></span>{" "}
+                  Awards
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="font-body text-sm text-white-variant hover:text-primary transition-colors flex items-center gap-2"
                 >

@@ -99,6 +99,9 @@ export default function Navbar() {
           <Link href="/gallery" className={navLinkClass("/gallery")}>
             Gallery
           </Link>
+          <Link href="/awards" className={navLinkClass("/awards")}>
+            Awards
+          </Link>
           <Link href="/blog" className={navLinkClass("/blog")}>
             Blog
           </Link>
@@ -149,6 +152,9 @@ export default function Navbar() {
         </Link>
         <Link href="/gallery" className="text-white font-body font-medium block">
           Gallery
+        </Link>
+        <Link href="/awards" className="text-white font-body font-medium block">
+          Awards
         </Link>
         <Link href="/blog" className="text-white font-body font-medium block">
           Blog
