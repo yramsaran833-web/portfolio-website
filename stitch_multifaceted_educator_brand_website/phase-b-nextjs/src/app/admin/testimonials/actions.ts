@@ -18,7 +18,15 @@ export async function createTestimonial(data: TestimonialFormValues) {
     return { error: 'Unauthorized' }
   }
 
-  const { error } = await supabase.from('testimonials').insert(parsed.data)
+  const { error } = await supabase.from('testimonials').insert({
+    author_name: parsed.data.client_name,
+    author_role: parsed.data.client_role,
+    content: parsed.data.content,
+    avatar_url: parsed.data.avatar_url,
+    rating: parsed.data.rating,
+    is_featured: parsed.data.is_featured,
+    sort_order: parsed.data.sort_order
+  })
 
   if (error) {
     return { error: error.message }
@@ -36,7 +44,18 @@ export async function updateTestimonial(id: string, data: TestimonialFormValues)
     return { error: 'Invalid form data' }
   }
 
-  const { error } = await supabase.from('testimonials').update(parsed.data).eq('id', id)
+  const { error } = await supabase
+    .from('testimonials')
+    .update({
+      author_name: parsed.data.client_name,
+      author_role: parsed.data.client_role,
+      content: parsed.data.content,
+      avatar_url: parsed.data.avatar_url,
+      rating: parsed.data.rating,
+      is_featured: parsed.data.is_featured,
+      sort_order: parsed.data.sort_order
+    })
+    .eq('id', id)
 
   if (error) {
     return { error: error.message }

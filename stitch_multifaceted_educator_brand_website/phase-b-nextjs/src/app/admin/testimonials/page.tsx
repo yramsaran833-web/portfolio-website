@@ -1,4 +1,4 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Plus, Search, Edit } from 'lucide-react'
@@ -17,7 +17,7 @@ export default async function TestimonialsManagementPage({
   let dbQuery = supabase.from('testimonials').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false })
 
   if (query) {
-    dbQuery = dbQuery.ilike('client_name', `%${query}%`)
+    dbQuery = dbQuery.ilike('author_name', `%${query}%`)
   }
 
   const { data: testimonials } = await dbQuery
@@ -68,16 +68,16 @@ export default async function TestimonialsManagementPage({
                     <td className="px-6 py-4 flex items-center gap-3">
                       {t.avatar_url ? (
                         <div className="h-10 w-10 relative rounded-full overflow-hidden bg-gray-900 border border-gray-800 flex-shrink-0">
-                          <Image src={t.avatar_url} alt={t.client_name} fill className="object-cover" sizes="40px" />
+                          <Image src={t.avatar_url} alt={t.author_name} fill className="object-cover" sizes="40px" />
                         </div>
                       ) : (
                         <div className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-500 flex-shrink-0">
-                          {t.client_name.charAt(0)}
+                          {t.author_name?.charAt(0) || '?'}
                         </div>
                       )}
-                      <span className="font-medium text-white">{t.client_name}</span>
+                      <span className="font-medium text-white">{t.author_name}</span>
                     </td>
-                    <td className="px-6 py-4">{t.client_role || '-'}</td>
+                    <td className="px-6 py-4">{t.author_role || '-'}</td>
                     <td className="px-6 py-4">
                       <div className="flex text-[#d4af37]">
                         {Array.from({ length: t.rating }).map((_, i) => (
@@ -87,15 +87,20 @@ export default async function TestimonialsManagementPage({
                     </td>
                     <td className="px-6 py-4">
                       {t.is_featured ? (
-                        <span className="bg-[#d4af37]/20 text-[#d4af37] px-2 py-1 rounded-full text-xs">Featured</span>
-                      ) : '-'}
+                        <span className="inline-flex items-center rounded-full bg-[#d4af37]/10 px-2 py-1 text-xs font-medium text-[#d4af37]">
+                          Featured
+                        </span>
+                      ) : (
+                        <span className="text-gray-500">-</span>
+                      )}
                     </td>
+                    <td className="px-6 py-4">{t.sort_order}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex justify-end items-center gap-3">
                         <Link href={`/admin/testimonials/${t.id}/edit`} className="text-gray-400 hover:text-white transition-colors" title="Edit">
                           <Edit className="h-4 w-4" />
                         </Link>
-                        <DeleteTestimonialButton id={t.id} name={t.client_name} />
+                        <DeleteTestimonialButton id={t.id} name={t.author_name} />
                       </div>
                     </td>
                   </tr>
