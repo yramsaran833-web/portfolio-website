@@ -16,7 +16,7 @@ interface BlogFormProps {
 export function BlogForm({ initialData, categories }: BlogFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.cover_image || initialData?.cover_image_url || null)
+  const [imagePreview, setImagePreview] = useState<string | null>((initialData as any)?.cover_image || initialData?.cover_image_url || null)
   const [uploadingImage, setUploadingImage] = useState(false)
 
   const compressImage = async (file: File): Promise<File> => {
@@ -57,10 +57,10 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
       title: initialData?.title || '',
       slug: initialData?.slug || '',
       content: initialData?.content || '',
-      summary: initialData?.excerpt || initialData?.summary || '',
+      summary: (initialData as any)?.excerpt || initialData?.summary || '',
       category_id: initialData?.category_id || '',
       published: initialData?.published || false,
-      cover_image_url: initialData?.cover_image || initialData?.cover_image_url || '',
+      cover_image_url: (initialData as any)?.cover_image || initialData?.cover_image_url || '',
     }
   })
 
