@@ -60,9 +60,9 @@ export default async function BlogPage() {
                         className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                       ></Link>
                       <div className="aspect-video relative overflow-hidden shrink-0 bg-white/5 flex items-center justify-center">
-                        {post.cover_image_url ? (
+                        {post.cover_image ? (
                           <img
-                            src={post.cover_image_url}
+                            src={post.cover_image}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                             alt={post.title}
                             loading="lazy"
@@ -79,7 +79,7 @@ export default async function BlogPage() {
                           {post.title}
                         </h4>
                         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
-                          {post.summary || post.content.substring(0, 150) + "..."}
+                          {post.excerpt || post.content.substring(0, 150) + "..."}
                         </p>
                         {post.blog_categories && (
                           <div className="flex items-center gap-2">

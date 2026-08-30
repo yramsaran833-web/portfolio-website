@@ -16,9 +16,17 @@ export async function createBlogPost(data: BlogPostFormValues) {
   const item = parsed.data;
   if (item.category_id === '') item.category_id = null;
 
-  const { error } = await supabase.from('blog_posts').insert({
-    ...item,
-  })
+  const dbItem = {
+    title: item.title,
+    slug: item.slug,
+    content: item.content,
+    excerpt: item.summary,
+    cover_image: item.cover_image_url,
+    category_id: item.category_id,
+    published: item.published
+  };
+
+  const { error } = await supabase.from('blog_posts').insert(dbItem)
 
   if (error) {
     if (error.code === '23505') {
@@ -42,9 +50,17 @@ export async function updateBlogPost(id: string, data: BlogPostFormValues) {
   const item = parsed.data;
   if (item.category_id === '') item.category_id = null;
 
-  const { error } = await supabase.from('blog_posts').update({
-    ...item,
-  }).eq('id', id)
+  const dbItem = {
+    title: item.title,
+    slug: item.slug,
+    content: item.content,
+    excerpt: item.summary,
+    cover_image: item.cover_image_url,
+    category_id: item.category_id,
+    published: item.published
+  };
+
+  const { error } = await supabase.from('blog_posts').update(dbItem).eq('id', id)
 
   if (error) {
     if (error.code === '23505') {
