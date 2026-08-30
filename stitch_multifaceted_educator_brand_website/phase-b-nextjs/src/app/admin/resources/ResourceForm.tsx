@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,11 +22,9 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
     resolver: zodResolver(resourceSchema),
     defaultValues: {
       title: initialData?.title || '',
-      slug: initialData?.slug || '',
       description: initialData?.description || '',
       category_id: initialData?.category_id || '',
       file_url: initialData?.file_url || '',
-      is_public: initialData?.is_public ?? true,
     }
   })
 
@@ -115,15 +113,9 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
           <div className="space-y-4 bg-[#050812] border border-gray-800 rounded-lg p-6">
             <h3 className="font-medium text-white border-b border-gray-800 pb-2">Information</h3>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Title *</label>
-                <input {...form.register('title')} className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300">Slug *</label>
-                <input {...form.register('slug')} className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]" />
-              </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300">Title *</label>
+              <input {...form.register('title')} className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]" />
             </div>
 
             <div className="space-y-2">
@@ -142,11 +134,6 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
                 <option value="">No Category</option>
                 {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
-            </div>
-
-            <div className="flex items-center space-x-2 pt-2">
-              <input type="checkbox" id="is_public" {...form.register('is_public')} className="rounded border-gray-800 text-[#d4af37] focus:ring-[#d4af37]" />
-              <label htmlFor="is_public" className="text-sm font-medium text-gray-400">Publicly Accessible</label>
             </div>
           </div>
         </div>

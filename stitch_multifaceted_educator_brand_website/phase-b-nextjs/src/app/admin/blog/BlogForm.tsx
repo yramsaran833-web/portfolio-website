@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -16,7 +16,7 @@ interface BlogFormProps {
 export function BlogForm({ initialData, categories }: BlogFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
-  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.featured_image || null)
+  const [imagePreview, setImagePreview] = useState<string | null>(initialData?.cover_image_url || null)
   const [uploadingImage, setUploadingImage] = useState(false)
 
   const form = useForm<BlogPostFormValues>({
@@ -25,12 +25,10 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
       title: initialData?.title || '',
       slug: initialData?.slug || '',
       content: initialData?.content || '',
-      excerpt: initialData?.excerpt || '',
+      summary: initialData?.summary || '',
       category_id: initialData?.category_id || '',
-      status: initialData?.status || 'draft',
-      seo_title: initialData?.seo_title || '',
-      seo_description: initialData?.seo_description || '',
-      featured_image: initialData?.featured_image || '',
+      published: initialData?.published || false,
+      cover_image_url: initialData?.cover_image_url || '',
     }
   })
 
@@ -49,7 +47,7 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
       alert(res.error)
     } else if (res.url) {
       setImagePreview(res.url)
-      form.setValue('featured_image', res.url)
+      form.setValue('cover_image_url', res.url)
     }
   }
 
@@ -112,9 +110,9 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-300">Excerpt (Optional)</label>
+            <label className="text-sm font-medium text-gray-300">Summary (Optional)</label>
             <textarea 
-              {...form.register('excerpt')}
+              {...form.register('summary')}
               rows={3}
               className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
               placeholder="Short summary for blog list"
@@ -127,15 +125,13 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
           <div className="bg-[#050812] border border-gray-800 rounded-lg p-4 space-y-4">
             <h3 className="font-medium text-white border-b border-gray-800 pb-2">Publishing</h3>
             
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">Status</label>
-              <select 
-                {...form.register('status')}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-              >
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
-              </select>
+            <div className="space-y-2 flex items-center justify-between">
+              <label className="text-sm font-medium text-gray-400">Published</label>
+              <input 
+                type="checkbox"
+                {...form.register('published')}
+                className="w-5 h-5 bg-[#0a0f1d] border border-gray-800 rounded focus:ring-[#d4af37] text-[#d4af37] accent-[#d4af37]"
+              />
             </div>
 
             <div className="space-y-2">
@@ -172,7 +168,7 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
                   <Image src={imagePreview} alt="Preview" fill className="object-cover" />
                   <button 
                     type="button" 
-                    onClick={() => { setImagePreview(null); form.setValue('featured_image', '') }}
+                    onClick={() => { setImagePreview(null); form.setValue('cover_image_url', '') }}
                     className="absolute top-2 right-2 bg-black/50 hover:bg-black/80 text-white text-xs px-2 py-1 rounded"
                   >
                     Remove
@@ -185,7 +181,7 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
                 </div>
               )}
               
-              <input type="hidden" {...form.register('featured_image')} />
+              <input type="hidden" {...form.register('cover_image_url')} />
               
               <label className="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white text-sm py-2 rounded-md cursor-pointer transition-colors">
                 {uploadingImage ? 'Uploading...' : 'Upload Image'}
@@ -194,24 +190,7 @@ export function BlogForm({ initialData, categories }: BlogFormProps) {
             </div>
           </div>
 
-          <div className="bg-[#050812] border border-gray-800 rounded-lg p-4 space-y-4">
-            <h3 className="font-medium text-white border-b border-gray-800 pb-2">SEO Settings</h3>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">SEO Title</label>
-              <input 
-                {...form.register('seo_title')}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">SEO Description</label>
-              <textarea 
-                {...form.register('seo_description')}
-                rows={2}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-              />
-            </div>
-          </div>
+
         </div>
       </div>
 

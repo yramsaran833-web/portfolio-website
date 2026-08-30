@@ -13,15 +13,8 @@ export async function createBlogPost(data: BlogPostFormValues) {
     return { error: 'Invalid form data' }
   }
 
-  const { data: user, error: authError } = await supabase.auth.getUser()
-  if (authError || !user?.user) {
-    return { error: 'Unauthorized' }
-  }
-
   const { error } = await supabase.from('blog_posts').insert({
     ...parsed.data,
-    author_id: user.user.id,
-    published_at: parsed.data.status === 'published' ? new Date().toISOString() : null,
   })
 
   if (error) {
@@ -45,7 +38,6 @@ export async function updateBlogPost(id: string, data: BlogPostFormValues) {
 
   const { error } = await supabase.from('blog_posts').update({
     ...parsed.data,
-    published_at: parsed.data.status === 'published' ? new Date().toISOString() : null,
   }).eq('id', id)
 
   if (error) {
@@ -62,8 +54,7 @@ export async function updateBlogPost(id: string, data: BlogPostFormValues) {
 export async function deleteBlogPost(id: string) {
   const supabase = await createClient()
 
-  // First fetch the post to get the featured image URL if it's hosted in our bucket
-  const { data: post } = await supabase.from('blog_posts').select('featured_image').eq('id', id).single()
+  const { data: post } = await supabase.from('blog_posts').select('cover_image_url').eq('id', id).single()
 
   const { error } = await supabase.from('blog_posts').delete().eq('id', id)
 
@@ -72,8 +63,8 @@ export async function deleteBlogPost(id: string) {
   }
 
   // If there's an image in our storage, try to delete it
-  if (post?.featured_image && post.featured_image.includes('/storage/v1/object/public/blog/')) {
-    const filename = post.featured_image.split('/').pop()
+  if (post?.cover_image_url && post.cover_image_url.includes('/storage/v1/object/public/blog/')) {
+    const filename = post.cover_image_url.split('/').pop()
     if (filename) {
       await supabase.storage.from('blog').remove([filename])
     }

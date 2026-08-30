@@ -7,12 +7,10 @@ export const blogPostSchema = z.object({
     .min(3, 'Slug must be at least 3 characters long')
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Slug can only contain lowercase letters, numbers, and hyphens'),
   content: z.string().min(10, 'Content is required (min 10 chars)'),
-  excerpt: z.string().optional(),
-  featured_image: z.string().url('Must be a valid URL').optional().or(z.literal('')),
+  summary: z.string().optional(),
+  cover_image_url: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   category_id: z.string().uuid('Invalid category').optional().nullable(),
-  status: z.enum(['draft', 'published', 'scheduled']),
-  seo_title: z.string().optional(),
-  seo_description: z.string().optional(),
+  published: z.boolean().default(false),
 });
 
 export type BlogPostFormValues = z.infer<typeof blogPostSchema>;

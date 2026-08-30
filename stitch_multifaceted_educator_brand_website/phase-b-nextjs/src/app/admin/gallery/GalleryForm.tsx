@@ -23,13 +23,8 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
     resolver: zodResolver(galleryItemSchema),
     defaultValues: {
       title: initialData?.title || '',
-      description: initialData?.description || '',
       image_url: initialData?.image_url || '',
       album_id: initialData?.album_id || '',
-      alt_text: initialData?.alt_text || '',
-      is_featured: initialData?.is_featured || false,
-      sort_order: initialData?.sort_order || 0,
-      status: initialData?.status || 'unpublished',
     }
   })
 
@@ -135,25 +130,6 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
                 placeholder="Image title"
               />
             </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">Description (Optional)</label>
-              <textarea 
-                {...form.register('description')}
-                rows={3}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-                placeholder="Short description"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300">Alt Text (For accessibility/SEO)</label>
-              <input 
-                {...form.register('alt_text')}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-                placeholder="Describe the image"
-              />
-            </div>
           </div>
         </div>
 
@@ -161,17 +137,6 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
         <div className="space-y-6">
           <div className="bg-[#050812] border border-gray-800 rounded-lg p-4 space-y-4">
             <h3 className="font-medium text-white border-b border-gray-800 pb-2">Settings</h3>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">Status</label>
-              <select 
-                {...form.register('status')}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-              >
-                <option value="unpublished">Unpublished</option>
-                <option value="published">Published</option>
-              </select>
-            </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-400">Album</label>
@@ -184,27 +149,6 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
                   <option key={a.id} value={a.id}>{a.title}</option>
                 ))}
               </select>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-400">Sort Order</label>
-              <input 
-                type="number"
-                {...form.register('sort_order')}
-                className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]"
-              />
-            </div>
-
-            <div className="flex items-center space-x-2 pt-2">
-              <input 
-                type="checkbox" 
-                id="is_featured"
-                {...form.register('is_featured')}
-                className="rounded border-gray-800 text-[#d4af37] focus:ring-[#d4af37]"
-              />
-              <label htmlFor="is_featured" className="text-sm font-medium text-gray-400">
-                Featured Image
-              </label>
             </div>
           </div>
         </div>
