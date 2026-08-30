@@ -10,7 +10,7 @@ export const blogPostSchema = z.object({
   summary: z.string().optional(),
   cover_image_url: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   category_id: z.string().uuid('Invalid category').optional().nullable(),
-  published: z.boolean().default(false),
+  published: z.boolean().optional(),
 });
 
 export type BlogPostFormValues = z.infer<typeof blogPostSchema>;

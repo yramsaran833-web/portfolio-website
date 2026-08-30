@@ -22,6 +22,7 @@ export default async function GalleryPage() {
     .from("gallery_albums")
     .select("*");
 
+  return (
     <>
       {/* Header Section */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">

@@ -23,6 +23,7 @@ export default async function BlogPage() {
     .from("blog_categories")
     .select("*");
 
+  return (
     <>
       {/* Header Section */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">
@@ -59,9 +60,9 @@ export default async function BlogPage() {
                         className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                       ></Link>
                       <div className="aspect-video relative overflow-hidden shrink-0 bg-white/5 flex items-center justify-center">
-                        {post.cover_image ? (
+                        {post.cover_image_url ? (
                           <img
-                            src={post.cover_image}
+                            src={post.cover_image_url}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                             alt={post.title}
                             loading="lazy"
@@ -78,7 +79,7 @@ export default async function BlogPage() {
                           {post.title}
                         </h4>
                         <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
-                          {post.excerpt || post.content.substring(0, 150) + "..."}
+                          {post.summary || post.content.substring(0, 150) + "..."}
                         </p>
                         {post.blog_categories && (
                           <div className="flex items-center gap-2">
@@ -99,6 +100,7 @@ export default async function BlogPage() {
                   </div>
                 )}
               </div>
+            </div>
           </div>
 
           {/* Sidebar */}
