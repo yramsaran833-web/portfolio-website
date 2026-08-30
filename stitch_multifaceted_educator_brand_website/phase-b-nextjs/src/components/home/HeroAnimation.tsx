@@ -79,8 +79,18 @@ export default function HeroAnimation() {
           drawImageCover(context, img, dims.w, dims.h);
         }
       };
+      img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === frameCount) {
+          setIsLoaded(true);
+        }
+      };
       images.push(img);
     }
+    
+    const safetyTimeout = setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
 
     let isScrolling = false;
     const onScroll = () => {
@@ -135,28 +145,36 @@ export default function HeroAnimation() {
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      clearTimeout(safetyTimeout);
     };
   }, []);
 
   return (
-    <div className="sticky top-20 h-[calc(100vh-5rem)] w-full overflow-hidden flex items-center justify-center">
+    <div className="sticky top-20 h-[calc(100vh-5rem)] w-full overflow-hidden flex items-center justify-center bg-[#0a0a0a]">
+      {/* Fallback Text / Title behind Canvas (Visible if Canvas fails or is transparent) */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+        <h1 className="font-heading text-6xl md:text-9xl font-bold text-white text-center px-4">
+          RAM SARAN <span className="text-primary">YADAV</span>
+        </h1>
+      </div>
+
       {/* Preloader */}
-      {!isLoaded && (
-        <div
-          ref={loadingRef}
-          className="absolute z-50 flex flex-col items-center gap-6 transition-opacity duration-500"
-        >
-          <img
-            src="/assets/img/Logo.png"
-            alt="Ram Saran Yadav Logo"
-            className="h-20 w-auto object-contain drop-shadow-2xl animate-pulse"
-          />
-          <div className="text-white font-heading text-lg md:text-xl font-bold tracking-widest flex items-center gap-4 bg-black/40 px-6 py-3 rounded-full backdrop-blur-md border border-white/10">
-            <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-            <span ref={textRef}>Loading Sequence 0%</span>
-          </div>
+      <div
+        ref={loadingRef}
+        className={`absolute z-50 flex flex-col items-center gap-6 transition-opacity duration-1000 ${
+          isLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <img
+          src="/assets/img/Logo.png"
+          alt="Ram Saran Yadav Logo"
+          className="h-20 w-auto object-contain drop-shadow-2xl animate-pulse"
+        />
+        <div className="text-white font-heading text-lg md:text-xl font-bold tracking-widest flex items-center gap-4 bg-black/40 px-6 py-3 rounded-full backdrop-blur-md border border-white/10">
+          <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <span ref={textRef}>Loading Sequence 0%</span>
         </div>
-      )}
+      </div>
 
       {/* Canvas for scroll sequence */}
       <canvas
