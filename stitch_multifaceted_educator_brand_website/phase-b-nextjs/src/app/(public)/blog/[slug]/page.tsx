@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ShareButton } from "./ShareButton";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -63,6 +64,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <span className="text-[#d4af37]">{post.blog_categories.name}</span>
             </>
           )}
+        </div>
+        
+        <div className="mb-6">
+          <ShareButton title={post.title} slug={post.slug} />
         </div>
 
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-8 leading-tight">
