@@ -18,15 +18,10 @@ export async function createAward(data: AwardFormValues) {
     return { error: 'Unauthorized' }
   }
 
-  const dbItem = {
-    title: parsed.data.title,
-    organization: parsed.data.issuer || '',
-    year: parsed.data.issue_date || '',
-    description: parsed.data.description,
-    image_url: parsed.data.image_url
-  };
-
-  const { error } = await supabase.from('awards').insert(dbItem)
+  const { error } = await supabase.from('awards').insert({
+    ...parsed.data,
+    issue_date: parsed.data.issue_date || null
+  })
 
   if (error) {
     return { error: error.message }
@@ -44,15 +39,10 @@ export async function updateAward(id: string, data: AwardFormValues) {
     return { error: 'Invalid form data' }
   }
 
-  const dbItem = {
-    title: parsed.data.title,
-    organization: parsed.data.issuer || '',
-    year: parsed.data.issue_date || '',
-    description: parsed.data.description,
-    image_url: parsed.data.image_url
-  };
-
-  const { error } = await supabase.from('awards').update(dbItem).eq('id', id)
+  const { error } = await supabase.from('awards').update({
+    ...parsed.data,
+    issue_date: parsed.data.issue_date || null
+  }).eq('id', id)
 
   if (error) {
     return { error: error.message }

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Plus, Search, Edit } from 'lucide-react'
@@ -79,8 +79,8 @@ export default async function AwardsManagementPage({
                       )}
                     </td>
                     <td className="px-6 py-4 font-medium text-white">{award.title}</td>
-                    <td className="px-6 py-4">{award.organization || '-'}</td>
-                    <td className="px-6 py-4">{award.year || '-'}</td>
+                    <td className="px-6 py-4">{award.issuer || '-'}</td>
+                    <td className="px-6 py-4">{award.issue_date ? new Date(award.issue_date).toLocaleDateString() : '-'}</td>
                     <td className="px-6 py-4 text-right flex justify-end items-center gap-3 pt-6">
                       <Link href={`/admin/awards/${award.id}/edit`} className="text-gray-400 hover:text-white transition-colors" title="Edit">
                         <Edit className="h-4 w-4" />

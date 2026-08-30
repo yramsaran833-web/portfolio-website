@@ -54,8 +54,8 @@ export function AwardForm({ initialData }: AwardFormProps) {
     resolver: zodResolver(awardSchema),
     defaultValues: {
       title: initialData?.title || '',
-      issuer: (initialData as any)?.organization || initialData?.issuer || '',
-      issue_date: (initialData as any)?.year || initialData?.issue_date || '',
+      issuer: initialData?.issuer || '',
+      issue_date: initialData?.issue_date || '',
       image_url: initialData?.image_url || '',
       description: initialData?.description || '',
       sort_order: initialData?.sort_order || 0,

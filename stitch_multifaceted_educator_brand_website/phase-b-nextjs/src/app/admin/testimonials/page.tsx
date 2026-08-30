@@ -1,4 +1,4 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Plus, Search, Edit } from 'lucide-react'
@@ -17,7 +17,7 @@ export default async function TestimonialsManagementPage({
   let dbQuery = supabase.from('testimonials').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false })
 
   if (query) {
-    dbQuery = dbQuery.ilike('name', `%${query}%`)
+    dbQuery = dbQuery.ilike('client_name', `%${query}%`)
   }
 
   const { data: testimonials } = await dbQuery
@@ -68,16 +68,16 @@ export default async function TestimonialsManagementPage({
                     <td className="px-6 py-4 flex items-center gap-3">
                       {t.avatar_url ? (
                         <div className="h-10 w-10 relative rounded-full overflow-hidden bg-gray-900 border border-gray-800 flex-shrink-0">
-                          <Image src={t.avatar_url} alt={t.name} fill className="object-cover" sizes="40px" />
+                          <Image src={t.avatar_url} alt={t.client_name} fill className="object-cover" sizes="40px" />
                         </div>
                       ) : (
                         <div className="h-10 w-10 rounded-full bg-gray-800 flex items-center justify-center text-xs text-gray-500 flex-shrink-0">
-                          {t.name?.charAt(0) || 'U'}
+                          {t.client_name.charAt(0)}
                         </div>
                       )}
-                      <span className="font-medium text-white">{t.name}</span>
+                      <span className="font-medium text-white">{t.client_name}</span>
                     </td>
-                    <td className="px-6 py-4">{t.role || '-'}</td>
+                    <td className="px-6 py-4">{t.client_role || '-'}</td>
                     <td className="px-6 py-4">
                       <div className="flex text-[#d4af37]">
                         {Array.from({ length: t.rating }).map((_, i) => (
@@ -95,7 +95,7 @@ export default async function TestimonialsManagementPage({
                         <Link href={`/admin/testimonials/${t.id}/edit`} className="text-gray-400 hover:text-white transition-colors" title="Edit">
                           <Edit className="h-4 w-4" />
                         </Link>
-                        <DeleteTestimonialButton id={t.id} name={t.name} />
+                        <DeleteTestimonialButton id={t.id} name={t.client_name} />
                       </div>
                     </td>
                   </tr>

@@ -53,8 +53,8 @@ export function TestimonialForm({ initialData }: TestimonialFormProps) {
   const form = useForm({
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
-      client_name: (initialData as any)?.name || initialData?.client_name || '',
-      client_role: (initialData as any)?.role || initialData?.client_role || '',
+      client_name: initialData?.client_name || '',
+      client_role: initialData?.client_role || '',
       content: initialData?.content || '',
       avatar_url: initialData?.avatar_url || '',
       rating: initialData?.rating || 5,
