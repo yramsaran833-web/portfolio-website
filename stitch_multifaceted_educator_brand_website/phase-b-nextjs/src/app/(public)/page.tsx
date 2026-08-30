@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroAnimation from "@/components/home/HeroAnimation";
+import TestimonialSlider from "@/components/home/TestimonialSlider";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Ram Saran Yadav | Educator, Entrepreneur & Digital Creator",
@@ -8,7 +10,17 @@ export const metadata = {
     "Official website of Ram Saran Yadav. Government Teacher at Shree Janta Secondary School and Founder of United Digital Printing Press.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+
+  // Fetch featured testimonials
+  const { data: testimonials } = await supabase
+    .from("testimonials")
+    .select("*")
+    .eq("is_featured", true)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
+
   return (
     <>
       {/* MODULE: Premium Hero (Scroll Jacking) */}
@@ -349,6 +361,26 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+        {/* MODULE: Testimonials */}
+        {testimonials && testimonials.length > 0 && (
+          <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5 relative overflow-hidden">
+            <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div className="text-center mb-16 animate-on-scroll">
+              <h2 className="font-heading text-sm text-[#d4af37] uppercase tracking-widest font-bold mb-4">
+                What People Say
+              </h2>
+              <h3 className="font-heading text-4xl md:text-5xl font-bold text-white">
+                Testimonials
+              </h3>
+            </div>
+
+            <div className="animate-on-scroll relative z-10">
+              <TestimonialSlider testimonials={testimonials} />
+            </div>
+          </section>
+        )}
 
       {/* MODULE: Final CTA */}
       <section className="py-32 relative text-center overflow-hidden">
