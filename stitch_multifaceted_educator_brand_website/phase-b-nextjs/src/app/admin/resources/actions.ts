@@ -13,7 +13,10 @@ export async function createResource(data: ResourceFormValues) {
   const { data: user, error: authError } = await supabase.auth.getUser()
   if (authError || !user?.user) return { error: 'Unauthorized' }
 
-  const { error } = await supabase.from('resources').insert(parsed.data)
+  const item = parsed.data;
+  if (item.category_id === '') item.category_id = null;
+
+  const { error } = await supabase.from('resources').insert(item)
   if (error) {
     if (error.code === '23505') return { error: 'Slug must be unique' }
     return { error: error.message }
@@ -28,7 +31,10 @@ export async function updateResource(id: string, data: ResourceFormValues) {
   const parsed = resourceSchema.safeParse(data)
   if (!parsed.success) return { error: 'Invalid form data' }
 
-  const { error } = await supabase.from('resources').update(parsed.data).eq('id', id)
+  const item = parsed.data;
+  if (item.category_id === '') item.category_id = null;
+
+  const { error } = await supabase.from('resources').update(item).eq('id', id)
   if (error) {
     if (error.code === '23505') return { error: 'Slug must be unique' }
     return { error: error.message }

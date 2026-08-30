@@ -18,6 +18,38 @@ export function TestimonialForm({ initialData }: TestimonialFormProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(initialData?.avatar_url || null)
   const [uploadingImage, setUploadingImage] = useState(false)
 
+  const compressImage = async (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          const MAX_WIDTH = 1920;
+          const MAX_HEIGHT = 1080;
+          if (width > height) {
+            if (width > MAX_WIDTH) { height = Math.round(height * MAX_WIDTH / width); width = MAX_WIDTH; }
+          } else {
+            if (height > MAX_HEIGHT) { width = Math.round(width * MAX_HEIGHT / height); height = MAX_HEIGHT; }
+          }
+          canvas.width = width; canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            if (blob) { resolve(new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", { type: 'image/jpeg' })); } 
+            else { resolve(file); }
+          }, 'image/jpeg', 0.8);
+        };
+      };
+    });
+  };
+
   const form = useForm({
     resolver: zodResolver(testimonialSchema),
     defaultValues: {
@@ -32,21 +64,29 @@ export function TestimonialForm({ initialData }: TestimonialFormProps) {
   })
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const originalFile = e.target.files?.[0]
+    if (!originalFile) return
 
     setUploadingImage(true)
-    const formData = new FormData()
-    formData.append('image', file)
+    try {
+      const file = await compressImage(originalFile)
+      const formData = new FormData()
+      formData.append('image', file)
 
-    const res = await uploadTestimonialImage(formData)
-    setUploadingImage(false)
+      const res = await uploadTestimonialImage(formData)
 
-    if (res.error) {
-      alert(res.error)
-    } else if (res.url) {
-      setImagePreview(res.url)
-      form.setValue('avatar_url', res.url)
+      if (res.error) {
+        alert(res.error)
+      } else if (res.url) {
+        setImagePreview(res.url)
+        form.setValue('avatar_url', res.url, { shouldValidate: true })
+        form.clearErrors('avatar_url')
+      }
+    } catch (err) {
+      console.error(err)
+      alert("An error occurred while uploading. Please try again.")
+    } finally {
+      setUploadingImage(false)
     }
   }
 

@@ -13,8 +13,11 @@ export async function createBlogPost(data: BlogPostFormValues) {
     return { error: 'Invalid form data' }
   }
 
+  const item = parsed.data;
+  if (item.category_id === '') item.category_id = null;
+
   const { error } = await supabase.from('blog_posts').insert({
-    ...parsed.data,
+    ...item,
   })
 
   if (error) {
@@ -36,8 +39,11 @@ export async function updateBlogPost(id: string, data: BlogPostFormValues) {
     return { error: 'Invalid form data' }
   }
 
+  const item = parsed.data;
+  if (item.category_id === '') item.category_id = null;
+
   const { error } = await supabase.from('blog_posts').update({
-    ...parsed.data,
+    ...item,
   }).eq('id', id)
 
   if (error) {

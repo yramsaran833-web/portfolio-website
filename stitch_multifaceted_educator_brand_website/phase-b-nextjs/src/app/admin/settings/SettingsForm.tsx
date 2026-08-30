@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useState } from 'react'
 import { updateSiteSettings, uploadSettingImage } from './actions'
 import { Loader2 } from 'lucide-react'
@@ -8,6 +8,38 @@ export function SettingsForm({ initialData }: { initialData: any }) {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState(initialData)
   const [msg, setMsg] = useState('')
+
+  const compressImage = async (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          const MAX_WIDTH = 1920;
+          const MAX_HEIGHT = 1080;
+          if (width > height) {
+            if (width > MAX_WIDTH) { height = Math.round(height * MAX_WIDTH / width); width = MAX_WIDTH; }
+          } else {
+            if (height > MAX_HEIGHT) { width = Math.round(width * MAX_HEIGHT / height); height = MAX_HEIGHT; }
+          }
+          canvas.width = width; canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            if (blob) { resolve(new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", { type: 'image/jpeg' })); } 
+            else { resolve(file); }
+          }, 'image/jpeg', 0.8);
+        };
+      };
+    });
+  };
 
   async function handleSave() {
     setLoading(true)
@@ -19,15 +51,22 @@ export function SettingsForm({ initialData }: { initialData: any }) {
   }
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>, field: 'logo_url' | 'profile_photo_url') {
-    const file = e.target.files?.[0]
-    if (!file) return
+    const originalFile = e.target.files?.[0]
+    if (!originalFile) return
     setLoading(true)
-    const fd = new FormData()
-    fd.append('file', file)
-    const res = await uploadSettingImage(fd, field)
-    if (res?.url) setData({ ...data, [field]: res.url })
-    else if (res?.error) alert(res.error)
-    setLoading(false)
+    try {
+      const file = await compressImage(originalFile)
+      const fd = new FormData()
+      fd.append('file', file)
+      const res = await uploadSettingImage(fd, field)
+      if (res?.url) setData({ ...data, [field]: res.url })
+      else if (res?.error) alert(res.error)
+    } catch (err) {
+      console.error(err)
+      alert("An error occurred while uploading. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
