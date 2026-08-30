@@ -19,6 +19,57 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
   const [imagePreviews, setImagePreviews] = useState<string[]>(initialData?.image_url ? [initialData.image_url] : [])
   const [uploadingImage, setUploadingImage] = useState(false)
 
+  // Compress image helper
+  const compressImage = async (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new window.Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          // Max dimensions
+          const MAX_WIDTH = 1920;
+          const MAX_HEIGHT = 1080;
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height = Math.round((height *= MAX_WIDTH / width));
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width = Math.round((width *= MAX_HEIGHT / height));
+              height = MAX_HEIGHT;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Output as JPEG with 0.8 quality
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                type: 'image/jpeg',
+                lastModified: Date.now(),
+              });
+              resolve(compressedFile);
+            } else {
+              resolve(file); // fallback
+            }
+          }, 'image/jpeg', 0.8);
+        };
+      };
+    });
+  };
+
   const form = useForm({
     resolver: zodResolver(galleryItemSchema),
     defaultValues: {
@@ -36,12 +87,9 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
     const newPreviews = [...imagePreviews]
 
     try {
-      for (const file of files) {
-        // Basic size check (5MB limit)
-        if (file.size > 5 * 1024 * 1024) {
-          alert(`File ${file.name} is too large. Please select an image under 5MB.`);
-          continue;
-        }
+      for (const originalFile of files) {
+        // Compress everything to ensure it's small and fast
+        const file = await compressImage(originalFile);
 
         const formData = new FormData()
         formData.append('image', file)
@@ -56,18 +104,19 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
 
       setImagePreviews(newPreviews)
       if (newPreviews.length > 0) {
-        form.setValue('image_url', newPreviews[0]) // just to satisfy form schema
+        form.setValue('image_url', newPreviews[0], { shouldValidate: true }) // Validate to remove any existing Zod errors
         form.clearErrors('image_url')
       }
     } catch (err) {
       console.error(err)
-      alert("An error occurred while uploading. The file might be too large (max 5MB) or the internet connection dropped.")
+      alert("An error occurred while uploading. Please try again.")
     } finally {
       setUploadingImage(false)
     }
   }
 
   async function onSubmit(data: GalleryItemFormValues) {
+    if (uploadingImage) return; // Prevent saving while uploading
     setIsSubmitting(true)
     setErrorMsg('')
     
