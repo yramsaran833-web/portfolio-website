@@ -35,24 +35,36 @@ export function GalleryForm({ initialData, albums }: GalleryFormProps) {
     setUploadingImage(true)
     const newPreviews = [...imagePreviews]
 
-    for (const file of files) {
-      const formData = new FormData()
-      formData.append('image', file)
+    try {
+      for (const file of files) {
+        // Basic size check (5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`File ${file.name} is too large. Please select an image under 5MB.`);
+          continue;
+        }
 
-      const res = await uploadGalleryImage(formData)
-      if (res.error) {
-        alert(res.error)
-      } else if (res.url) {
-        newPreviews.push(res.url)
+        const formData = new FormData()
+        formData.append('image', file)
+
+        const res = await uploadGalleryImage(formData)
+        if (res.error) {
+          alert(res.error)
+        } else if (res.url) {
+          newPreviews.push(res.url)
+        }
       }
-    }
 
-    setImagePreviews(newPreviews)
-    if (newPreviews.length > 0) {
-      form.setValue('image_url', newPreviews[0]) // just to satisfy form schema
-      form.clearErrors('image_url')
+      setImagePreviews(newPreviews)
+      if (newPreviews.length > 0) {
+        form.setValue('image_url', newPreviews[0]) // just to satisfy form schema
+        form.clearErrors('image_url')
+      }
+    } catch (err) {
+      console.error(err)
+      alert("An error occurred while uploading. The file might be too large (max 5MB) or the internet connection dropped.")
+    } finally {
+      setUploadingImage(false)
     }
-    setUploadingImage(false)
   }
 
   async function onSubmit(data: GalleryItemFormValues) {
