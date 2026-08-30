@@ -49,11 +49,11 @@ ALTER TABLE resources
 ADD COLUMN resource_type TEXT DEFAULT 'pdf' CHECK (resource_type IN ('pdf', 'youtube'));
 
 -- Seed default resource categories so they exist in the DB for the user
-INSERT INTO resource_categories (name, slug, description) VALUES
-    ('Syllabus', 'syllabus', 'Official course syllabi'),
-    ('Past Exam Paper', 'past-exam-paper', 'Previous years examination papers'),
-    ('Practice PDF', 'practice-pdf', 'Practice materials and worksheets'),
-    ('Notes', 'notes', 'Study notes and materials'),
-    ('Important Questions', 'important-questions', 'Key questions for exam preparation'),
-    ('Video Lectures', 'video-lectures', 'YouTube video course materials')
+INSERT INTO resource_categories (name, slug) VALUES
+    ('Syllabus', 'syllabus'),
+    ('Past Exam Paper', 'past-exam-paper'),
+    ('Practice PDF', 'practice-pdf'),
+    ('Notes', 'notes'),
+    ('Important Questions', 'important-questions'),
+    ('Video Lectures', 'video-lectures')
 ON CONFLICT (slug) DO NOTHING;
