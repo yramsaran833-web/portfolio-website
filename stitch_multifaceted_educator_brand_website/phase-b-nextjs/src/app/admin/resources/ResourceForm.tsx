@@ -25,8 +25,11 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
       description: initialData?.description || '',
       category_id: initialData?.category_id || '',
       file_url: initialData?.file_url || '',
+      resource_type: initialData?.resource_type || 'pdf',
     }
   })
+
+  const resourceType = form.watch('resource_type')
 
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -48,7 +51,7 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
     }
   }
 
-  async function onSubmit(data: ResourceFormValues) {
+  async function onSubmit(data: any) {
     setIsSubmitting(true)
     setErrorMsg('')
     
@@ -82,31 +85,57 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
           <div className="bg-[#050812] border border-gray-800 rounded-lg p-6 space-y-4">
             <h3 className="font-medium text-white border-b border-gray-800 pb-2 mb-4">Resource File</h3>
             <div className="space-y-4">
-              {fileUrlPreview ? (
-                <div className="p-4 rounded-md bg-[#0a0f1d] border border-gray-800 flex items-center justify-between max-w-lg">
-                  <div className="flex items-center text-gray-300">
-                    <FileIcon className="h-5 w-5 mr-2 text-[#d4af37]" />
-                    <span className="text-sm truncate max-w-[200px]">{fileUrlPreview.split('/').pop()}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <a href={fileUrlPreview} target="_blank" rel="noreferrer" className="text-xs text-[#d4af37] hover:underline">View</a>
-                    <button type="button" onClick={() => { setFileUrlPreview(null); form.setValue('file_url', '') }} className="text-xs text-red-400 hover:underline">Remove</button>
-                  </div>
-                </div>
+              <div className="flex gap-4 mb-4">
+                <label className="flex items-center gap-2 text-white cursor-pointer">
+                  <input type="radio" value="pdf" {...form.register('resource_type')} className="text-primary" />
+                  PDF File
+                </label>
+                <label className="flex items-center gap-2 text-white cursor-pointer">
+                  <input type="radio" value="youtube" {...form.register('resource_type')} className="text-primary" />
+                  YouTube URL
+                </label>
+              </div>
+
+              {resourceType === 'pdf' ? (
+                <>
+                  {fileUrlPreview && !fileUrlPreview.includes('youtube') ? (
+                    <div className="p-4 rounded-md bg-[#0a0f1d] border border-gray-800 flex items-center justify-between max-w-lg">
+                      <div className="flex items-center text-gray-300">
+                        <FileIcon className="h-5 w-5 mr-2 text-[#d4af37]" />
+                        <span className="text-sm truncate max-w-[200px]">{fileUrlPreview.split('/').pop()}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <a href={fileUrlPreview} target="_blank" rel="noreferrer" className="text-xs text-[#d4af37] hover:underline">View</a>
+                        <button type="button" onClick={() => { setFileUrlPreview(null); form.setValue('file_url', '') }} className="text-xs text-red-400 hover:underline">Remove</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-8 max-w-lg rounded-md bg-[#0a0f1d] border border-gray-800 border-dashed flex flex-col items-center justify-center text-gray-500">
+                      <FileIcon className="h-10 w-10 mb-2 opacity-50" />
+                      <span className="text-sm">Select a file to upload</span>
+                    </div>
+                  )}
+                  
+                  {form.formState.errors.file_url && <p className="text-xs text-red-500">{form.formState.errors.file_url.message as string}</p>}
+                  <input type="hidden" {...form.register('file_url')} />
+                  
+                  <label className="inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-md cursor-pointer transition-colors">
+                    {uploading ? 'Uploading...' : 'Choose File'}
+                    <input type="file" className="hidden" disabled={uploading} onChange={handleFileUpload} />
+                  </label>
+                </>
               ) : (
-                <div className="p-8 max-w-lg rounded-md bg-[#0a0f1d] border border-gray-800 border-dashed flex flex-col items-center justify-center text-gray-500">
-                  <FileIcon className="h-10 w-10 mb-2 opacity-50" />
-                  <span className="text-sm">Select a file to upload</span>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-300">YouTube Video URL</label>
+                  <input 
+                    type="url" 
+                    {...form.register('file_url')} 
+                    placeholder="https://youtube.com/watch?v=..."
+                    className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]" 
+                  />
+                  {form.formState.errors.file_url && <p className="text-xs text-red-500">{form.formState.errors.file_url.message as string}</p>}
                 </div>
               )}
-              
-              {form.formState.errors.file_url && <p className="text-xs text-red-500">{form.formState.errors.file_url.message as string}</p>}
-              <input type="hidden" {...form.register('file_url')} />
-              
-              <label className="inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm rounded-md cursor-pointer transition-colors">
-                {uploading ? 'Uploading...' : 'Choose File'}
-                <input type="file" className="hidden" disabled={uploading} onChange={handleFileUpload} />
-              </label>
             </div>
           </div>
 

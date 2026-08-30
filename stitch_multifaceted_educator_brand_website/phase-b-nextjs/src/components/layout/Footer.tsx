@@ -190,10 +190,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-body text-white/40 text-xs">
-            &copy; {new Date().getFullYear()} Ram Saran Yadav. All rights reserved.
-          </p>
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <div className="font-body text-white/40 text-xs space-y-1">
+            <p>&copy; {new Date().getFullYear()} Ram Saran Yadav. All rights reserved.</p>
+            <p>
+              Digital Partner: Renuva Digital |{" "}
+              <a href="https://www.ajayharijan.com.np" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+                www.ajayharijan.com.np
+              </a>{" "}
+              |{" "}
+              <a href="tel:+9779745367144" className="hover:text-white transition-colors">
+                Contact: +977-9745367144
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="font-body text-white/40 hover:text-white text-xs transition-colors">
               Privacy Policy
@@ -207,7 +217,7 @@ export default function Footer() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/9779815493389"
+        href="https://wa.me/9779745367144"
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.23)] hover:scale-110 transition-all duration-300 z-[9999]"

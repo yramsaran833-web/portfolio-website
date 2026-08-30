@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "United Digital Printing Press | Ram Saran Yadav",
@@ -7,7 +8,15 @@ export const metadata = {
     "Delivering commercial printing and enterprise design solutions at scale. Over 10,000+ orders successfully completed.",
 };
 
-export default function PrintingPage() {
+export default async function PrintingPage() {
+  const supabase = await createClient();
+  const { data: projects } = await supabase
+    .from("printing_projects")
+    .select("*")
+    .eq("status", "published")
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
+
   return (
     <>
       {/* Premium Hero & Company Introduction */}
@@ -343,6 +352,38 @@ export default function PrintingPage() {
         </div>
       </section>
 
+      {/* Recent Print Projects */}
+      {projects && projects.length > 0 && (
+        <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-sm text-primary uppercase tracking-widest font-bold mb-4">
+              Portfolio
+            </h2>
+            <h3 className="font-heading text-4xl font-black text-white">
+              Recent Print Projects
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div key={project.id} className="group relative rounded-3xl overflow-hidden glass-panel border border-white/5 aspect-square">
+                <Image
+                  src={project.image_url}
+                  alt={project.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                  <h4 className="font-heading font-bold text-white text-xl">{project.title}</h4>
+                  {project.description && (
+                    <p className="text-white/80 text-sm mt-2">{project.description}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Why Choose Us & The Process */}
       <section className="py-24 bg-surface/30 border-y border-white/5 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
@@ -563,6 +604,22 @@ export default function PrintingPage() {
               </button>
             </div>
           </form>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-12 px-6 md:px-16 max-w-7xl mx-auto mb-12">
+        <div className="glass-panel p-2 rounded-3xl border border-white/10 relative overflow-hidden h-[400px]">
+          <iframe
+            src="https://maps.google.com/maps?q=United+Digital+Printing+Press,+Siddharthanagar,+Nepal&hl=en&z=16&output=embed"
+            width="100%"
+            height="100%"
+            style={{ border: 0, borderRadius: "1rem" }}
+            allowFullScreen={false}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="United Digital Printing Press Location"
+          ></iframe>
         </div>
       </section>
     </>

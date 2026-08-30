@@ -1,40 +1,28 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import CreatorAnimation from "@/components/creator/CreatorAnimation";
+import { createClient } from "@/lib/supabase/server";
 export const metadata = {
   title: "Digital Creator | Ram Saran Yadav",
   description:
     "Scaling education and inspiring millions through high-quality video production and engaging social content.",
 };
 
-export default function CreatorPage() {
+export default async function CreatorPage() {
+  const supabase = await createClient();
+  const { data: reels } = await supabase
+    .from("facebook_reels")
+    .select("*")
+    .eq("status", "published")
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: false });
+
   return (
     <>
       {/* Creator Scroll Canvas Section */}
       <section id="creator-scroll-container" className="relative h-[500vh] bg-black">
         <div className="sticky top-20 h-[calc(100vh-5rem)] w-full overflow-hidden flex items-center justify-center text-left">
-          {/* Preloader */}
-          <div
-            id="hero-loading"
-            className="absolute z-50 flex flex-col items-center gap-6"
-          >
-            <img
-              src="/assets/img/Logo.png"
-              alt="Ram Saran Yadav Logo"
-              className="h-20 w-auto object-contain drop-shadow-2xl animate-pulse"
-            />
-            <div className="text-white font-heading text-lg md:text-xl font-bold tracking-widest flex items-center gap-4 bg-black/40 px-6 py-3 rounded-full backdrop-blur-md border border-white/10">
-              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
-              <span id="hero-loading-text">Loading Sequence 0%</span>
-            </div>
-          </div>
-
-          {/* Canvas Animation Background */}
-          <canvas
-            id="creator-sequence"
-            className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-100"
-            aria-hidden="true"
-          ></canvas>
+          <CreatorAnimation />
 
           {/* Dark overlays */}
           <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/80 via-black/30 to-transparent z-10 pointer-events-none"></div>
@@ -195,6 +183,41 @@ export default function CreatorPage() {
           </div>
         </div>
       </section>
+
+      {/* Featured Facebook Reels */}
+      {reels && reels.length > 0 && (
+        <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-sm text-[#1877F2] uppercase tracking-widest font-bold mb-4">
+              Trending Now
+            </h2>
+            <h3 className="font-heading text-4xl font-black text-white">
+              Featured Reels
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {reels.map((reel) => (
+              <div key={reel.id} className="glass-panel p-6 rounded-3xl border border-white/5 flex flex-col justify-between items-center text-center group hover:border-[#1877F2]/50 transition-colors">
+                <div className="w-16 h-16 rounded-full bg-[#1877F2]/10 text-[#1877F2] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-3xl">play_circle</span>
+                </div>
+                <h4 className="font-heading font-bold text-white text-xl mb-4 line-clamp-2">
+                  {reel.title}
+                </h4>
+                <a 
+                  href={reel.url} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="mt-auto px-6 py-3 w-full bg-[#1877F2] hover:bg-[#1877F2]/80 text-white rounded-full font-bold transition-colors flex items-center justify-center gap-2"
+                >
+                  Watch on Facebook
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }

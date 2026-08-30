@@ -239,17 +239,18 @@ export default function ContactPage() {
 
           {/* Visuals & Socials */}
           <div className="space-y-12 animate-on-scroll">
-            <div className="glass-panel p-2 rounded-3xl border border-white/10 relative overflow-hidden group h-[300px]">
-              {/* Map Placeholder */}
-              <div className="absolute inset-0 bg-surface flex items-center justify-center">
-                <span className="material-symbols-outlined text-6xl text-white/10 group-hover:scale-110 transition-transform duration-500">
-                  map
-                </span>
-                <p className="absolute bottom-6 font-heading font-bold text-white-variant text-sm tracking-widest uppercase">
-                  Butwal, Nepal
-                </p>
+              <div className="glass-panel p-2 rounded-3xl border border-white/10 relative overflow-hidden group h-[300px]">
+                <iframe
+                  src="https://maps.google.com/maps?q=United+Digital+Printing+Press,+Siddharthanagar,+Nepal&hl=en&z=16&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: "1rem" }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="United Digital Printing Press Location"
+                ></iframe>
               </div>
-            </div>
 
             <div className="glass-panel p-8 rounded-3xl border border-white/5">
               <h3 className="font-heading text-2xl font-bold text-white mb-6">

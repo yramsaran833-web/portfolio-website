@@ -93,11 +93,19 @@ export default async function ResourcesPage() {
                 resources.map((resource, index) => (
                   <div key={resource.id} className="glass-panel p-6 rounded-2xl border border-white/10 hover:border-secondary/50 transition-colors group animate-on-scroll" style={{ transitionDelay: `${(index % 4) * 100}ms` }}>
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-lg bg-[#f40f02]/10 text-[#f40f02] flex items-center justify-center shrink-0">
-                        <span className="material-symbols-outlined text-2xl">
-                          picture_as_pdf
-                        </span>
-                      </div>
+                      {resource.resource_type === 'youtube' ? (
+                        <div className="w-12 h-12 rounded-lg bg-[#FF0000]/10 text-[#FF0000] flex items-center justify-center shrink-0">
+                          <span className="material-symbols-outlined text-2xl">
+                            play_circle
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="w-12 h-12 rounded-lg bg-[#f40f02]/10 text-[#f40f02] flex items-center justify-center shrink-0">
+                          <span className="material-symbols-outlined text-2xl">
+                            picture_as_pdf
+                          </span>
+                        </div>
+                      )}
                       {resource.resource_categories && (
                         <span className="text-xs font-bold bg-white/5 px-2 py-1 rounded text-on-surface-variant">
                           {/* @ts-ignore */}
@@ -112,23 +120,40 @@ export default async function ResourcesPage() {
                       {resource.description || "Study material"}
                     </p>
                     <div className="flex gap-2">
-                      <a
-                        href={resource.file_url}
-                        target="_blank"
-                        className="flex-1 text-center bg-white/5 hover:bg-white/10 text-white py-2 rounded-lg font-heading text-xs font-bold transition-colors"
-                      >
-                        Preview
-                      </a>
-                      <a
-                        href={resource.file_url}
-                        download
-                        className="flex-1 bg-secondary text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-1"
-                      >
-                        <span className="material-symbols-outlined text-[16px]">
-                          download
-                        </span>{" "}
-                        Download
-                      </a>
+                      {resource.resource_type === 'youtube' ? (
+                        <a
+                          href={resource.file_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="flex-1 bg-secondary text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-2"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">
+                            smart_display
+                          </span>{" "}
+                          Watch Video
+                        </a>
+                      ) : (
+                        <>
+                          <a
+                            href={resource.file_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 text-center bg-white/5 hover:bg-white/10 text-white py-2 rounded-lg font-heading text-xs font-bold transition-colors"
+                          >
+                            Preview
+                          </a>
+                          <a
+                            href={resource.file_url}
+                            download
+                            className="flex-1 bg-secondary text-[#0a0a0a] py-2 rounded-lg font-heading text-xs font-bold transition-colors shadow-lg hover:brightness-110 flex items-center justify-center gap-1"
+                          >
+                            <span className="material-symbols-outlined text-[16px]">
+                              download
+                            </span>{" "}
+                            Download
+                          </a>
+                        </>
+                      )}
                     </div>
                   </div>
                 ))

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CounterAnimation from "@/components/ui/CounterAnimation";
 import HeroAnimation from "@/components/home/HeroAnimation";
 import TestimonialSlider from "@/components/home/TestimonialSlider";
 import { createClient } from "@/lib/supabase/server";
@@ -125,8 +126,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-16 grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10 text-center">
           <div className="animate-on-scroll">
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
-              <span className="stat-counter">10</span>
-              <span className="text-primary">+</span>
+              <CounterAnimation target={10} suffix="+" />
             </div>
             <div className="font-heading text-sm text-white-variant uppercase tracking-widest mt-2 font-bold">
               Years Experience
@@ -137,8 +137,7 @@ export default async function Home() {
             style={{ transitionDelay: "100ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
-              <span className="stat-counter">5</span>k
-              <span className="text-primary">+</span>
+              <CounterAnimation target={5} suffix="k+" />
             </div>
             <div className="font-heading text-sm text-white-variant uppercase tracking-widest mt-2 font-bold">
               Students Guided
@@ -149,8 +148,7 @@ export default async function Home() {
             style={{ transitionDelay: "200ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
-              <span className="stat-counter">10</span>k
-              <span className="text-primary">+</span>
+              <CounterAnimation target={10} suffix="k+" />
             </div>
             <div className="font-heading text-sm text-white-variant uppercase tracking-widest mt-2 font-bold">
               Print Orders
@@ -161,8 +159,7 @@ export default async function Home() {
             style={{ transitionDelay: "300ms" }}
           >
             <div className="font-heading font-bold text-4xl md:text-7xl text-white drop-shadow-[0_0_15px_rgba(255,122,0,0.5)]">
-              <span className="stat-counter">100</span>k
-              <span className="text-primary">+</span>
+              <CounterAnimation target={100} suffix="k+" />
             </div>
             <div className="font-heading text-sm text-white-variant uppercase tracking-widest mt-2 font-bold">
               Digital Reach
