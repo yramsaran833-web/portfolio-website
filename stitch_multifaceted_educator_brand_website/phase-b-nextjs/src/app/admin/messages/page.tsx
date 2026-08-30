@@ -1,4 +1,4 @@
-﻿import Link from 'next/link'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { Eye, Search } from 'lucide-react'
 
@@ -45,11 +45,9 @@ export default async function MessagesPage({ searchParams }: { searchParams: Pro
                     <td className="px-6 py-4">{m.subject || 'No Subject'}</td>
                     <td className="px-6 py-4">
                       <span className={`px-2 py-1 rounded-full text-xs ${
-                        m.status === 'new' ? 'bg-red-500/10 text-red-500 font-bold' : 
-                        m.status === 'read' ? 'bg-blue-500/10 text-blue-500' : 
-                        m.status === 'replied' ? 'bg-green-500/10 text-green-500' : 'bg-gray-500/10 text-gray-400'
+                        !m.is_read ? 'bg-red-500/10 text-red-500 font-bold' : 'bg-gray-500/10 text-gray-400'
                       }`}>
-                        {m.status.toUpperCase()}
+                        {m.is_read ? 'READ' : 'NEW'}
                       </span>
                     </td>
                     <td className="px-6 py-4">{new Date(m.created_at).toLocaleDateString()}</td>

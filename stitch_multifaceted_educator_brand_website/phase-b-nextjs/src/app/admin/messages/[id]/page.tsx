@@ -1,4 +1,4 @@
-﻿import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
@@ -13,9 +13,9 @@ export default async function ViewMessagePage({ params }: { params: Promise<{ id
   if (error || !m) notFound()
 
   // Auto-mark as read if new
-  if (m.status === 'new') {
-    await updateMessageStatus(id, 'read')
-    m.status = 'read'
+  if (!m.is_read) {
+    await updateMessageStatus(id, true)
+    m.is_read = true
   }
 
   return (
@@ -25,7 +25,7 @@ export default async function ViewMessagePage({ params }: { params: Promise<{ id
           <Link href="/admin/messages" className="text-gray-400 hover:text-white"><ArrowLeft className="h-5 w-5" /></Link>
           <h2 className="text-2xl font-bold text-white">View Message</h2>
         </div>
-        <MessageActions id={m.id} currentStatus={m.status} />
+        <MessageActions id={m.id} isRead={m.is_read} />
       </div>
 
       <div className="bg-[#050812] border border-gray-800 rounded-lg p-6 space-y-6 text-gray-300">
@@ -38,10 +38,7 @@ export default async function ViewMessagePage({ params }: { params: Promise<{ id
             <p className="text-xs text-gray-500 uppercase">Email</p>
             <p className="text-[#d4af37]"><a href={`mailto:${m.email}`}>{m.email}</a></p>
           </div>
-          <div>
-            <p className="text-xs text-gray-500 uppercase">Phone</p>
-            <p>{m.phone || 'N/A'}</p>
-          </div>
+
           <div>
             <p className="text-xs text-gray-500 uppercase">Date</p>
             <p>{new Date(m.created_at).toLocaleString()}</p>

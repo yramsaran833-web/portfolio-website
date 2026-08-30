@@ -1,13 +1,13 @@
-﻿'use client'
+'use client'
 import { useState } from 'react'
 import { updateMessageStatus, deleteMessage } from '../actions'
 
-export function MessageActions({ id, currentStatus }: { id: string, currentStatus: string }) {
+export function MessageActions({ id, isRead }: { id: string, isRead: boolean }) {
   const [loading, setLoading] = useState(false)
 
-  async function handleStatus(e: React.ChangeEvent<HTMLSelectElement>) {
+  async function handleToggleRead() {
     setLoading(true)
-    await updateMessageStatus(id, e.target.value as any)
+    await updateMessageStatus(id, !isRead)
     setLoading(false)
   }
 
@@ -19,17 +19,13 @@ export function MessageActions({ id, currentStatus }: { id: string, currentStatu
 
   return (
     <div className="flex gap-4 items-center">
-      <select 
-        value={currentStatus} 
-        onChange={handleStatus} 
+      <button 
+        onClick={handleToggleRead} 
         disabled={loading}
         className="bg-[#0a0f1d] border border-gray-800 rounded-md py-1.5 px-3 text-sm text-white focus:outline-none focus:border-[#d4af37]"
       >
-        <option value="new">New</option>
-        <option value="read">Read</option>
-        <option value="replied">Replied</option>
-        <option value="archived">Archived</option>
-      </select>
+        {isRead ? 'Mark as Unread' : 'Mark as Read'}
+      </button>
       <button onClick={handleDelete} disabled={loading} className="text-red-400 hover:text-red-300 text-sm">Delete Message</button>
     </div>
   )
