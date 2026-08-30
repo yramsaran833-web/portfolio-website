@@ -64,9 +64,8 @@ export async function uploadResourceFile(formData: FormData) {
   const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
 
   const arrayBuffer = await file.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
-
-  const { data, error } = await supabase.storage.from('resources').upload(fileName, buffer, {
+  
+  const { data, error } = await supabase.storage.from('resources').upload(fileName, arrayBuffer, {
     cacheControl: '3600',
     upsert: false,
     contentType: file.type

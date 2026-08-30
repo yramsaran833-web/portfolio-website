@@ -32,9 +32,8 @@ export async function uploadSettingImage(formData: FormData, field: string) {
   const fileName = `${field}-${Date.now()}.${fileExt}`
 
   const arrayBuffer = await file.arrayBuffer()
-  const buffer = Buffer.from(arrayBuffer)
   
-  const { data, error } = await supabase.storage.from('site_settings').upload(fileName, buffer, { 
+  const { data, error } = await supabase.storage.from('site_settings').upload(fileName, arrayBuffer, { 
     upsert: false,
     contentType: file.type 
   })
