@@ -9,7 +9,7 @@ export const blogPostSchema = z.object({
   content: z.string().min(10, 'Content is required (min 10 chars)'),
   summary: z.string().optional(),
   cover_image_url: z.string().url('Must be a valid URL').optional().or(z.literal('')),
-  category_id: z.string().uuid('Invalid category').optional().nullable(),
+  category_id: z.string().uuid('Invalid category').or(z.literal('')).optional().nullable(),
   published: z.boolean().optional(),
 });
 
