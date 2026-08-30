@@ -158,7 +158,7 @@
 }
 
 * {
-    cursor: none !important; /* Hide default cursor for luxury custom cursor */
+    /* removed cursor: none !important; */
 }
 
 html {
