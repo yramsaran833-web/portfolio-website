@@ -1,12 +1,48 @@
-import Link from "next/link";
+"use client";
 
-export const metadata = {
-  title: "Contact Ram Saran Yadav | Let's Connect",
-  description:
-    "Get in touch with Ram Saran Yadav for teaching inquiries, commercial printing services, or content collaborations.",
-};
+import Link from "next/link";
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+// export const metadata = {
+//   title: "Contact Ram Saran Yadav | Let's Connect",
+//   description:
+//     "Get in touch with Ram Saran Yadav for teaching inquiries, commercial printing services, or content collaborations.",
+// };
 
 export default function ContactPage() {
+  const supabase = createClient();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const { error } = await supabase
+        .from("contact_messages")
+        .insert({
+          name: formData.get("name"),
+          email: formData.get("email"),
+          subject: formData.get("subject"),
+          message: formData.get("message"),
+        });
+
+      if (error) throw error;
+      setSubmitStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       {/* Header Section */}
@@ -109,7 +145,7 @@ export default function ContactPage() {
               possible.
             </p>
 
-            <form id="contactForm" className="space-y-6">
+            <form id="contactForm" className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
@@ -121,6 +157,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     id="name"
+                    name="name"
                     required
                     className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                     placeholder="John Doe"
@@ -136,6 +173,7 @@ export default function ContactPage() {
                   <input
                     type="email"
                     id="email"
+                    name="email"
                     required
                     className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                     placeholder="john@example.com"
@@ -152,10 +190,12 @@ export default function ContactPage() {
                 </label>
                 <select
                   id="subject"
+                  name="subject"
                   required
+                  defaultValue=""
                   className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors appearance-none"
                 >
-                  <option value="" disabled selected>
+                  <option value="" disabled>
                     Select a topic...
                   </option>
                   <option value="teaching">Educational Inquiry</option>
@@ -174,6 +214,7 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   required
                   rows={6}
                   className="w-full bg-surface border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
@@ -181,12 +222,24 @@ export default function ContactPage() {
                 ></textarea>
               </div>
 
+              {submitStatus === "success" && (
+                <div className="bg-green-500/20 text-green-400 p-4 rounded-xl text-sm">
+                  Thank you! Your message has been sent successfully. I will get back to you soon.
+                </div>
+              )}
+              {submitStatus === "error" && (
+                <div className="bg-red-500/20 text-red-400 p-4 rounded-xl text-sm">
+                  Oops! Something went wrong. Please try again later.
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full md:w-auto px-8 py-4 bg-primary text-black font-heading font-bold rounded-xl hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full md:w-auto px-8 py-4 bg-primary text-black font-heading font-bold rounded-xl hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(255,122,0,0.4)] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Send Message
-                <span className="material-symbols-outlined text-sm">send</span>
+                {isSubmitting ? "Sending..." : "Send Message"}
+                {!isSubmitting && <span className="material-symbols-outlined text-sm">send</span>}
               </button>
             </form>
           </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Blog & Articles | Ram Saran Yadav",
@@ -7,8 +8,21 @@ export const metadata = {
     "Read insights, educational tips, and business strategies from Ram Saran Yadav.",
 };
 
-export default function BlogPage() {
-  return (
+export default async function BlogPage() {
+  const supabase = await createClient();
+  
+  // Fetch published blog posts
+  const { data: posts } = await supabase
+    .from("blog_posts")
+    .select("*, blog_categories(name)")
+    .eq("published", true)
+    .order("created_at", { ascending: false });
+
+  // Fetch categories with counts
+  const { data: categories } = await supabase
+    .from("blog_categories")
+    .select("*");
+
     <>
       {/* Header Section */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">
@@ -37,133 +51,54 @@ export default function BlogPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Article Card 1 */}
-                <article className="glass-panel rounded-2xl overflow-hidden group flex flex-col h-full border border-white/5 hover:border-white/20 transition-colors relative">
-                  <Link
-                    href="/blog/starting-digital-printing-press"
-                    className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-                  ></Link>
-                  <div className="aspect-video relative overflow-hidden shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      alt="Printing Press"
-                      loading="lazy"
-                    />
+                {posts && posts.length > 0 ? (
+                  posts.map((post) => (
+                    <article key={post.id} className="glass-panel rounded-2xl overflow-hidden group flex flex-col h-full border border-white/5 hover:border-white/20 transition-colors relative">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+                      ></Link>
+                      <div className="aspect-video relative overflow-hidden shrink-0 bg-white/5 flex items-center justify-center">
+                        {post.cover_image ? (
+                          <img
+                            src={post.cover_image}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                            alt={post.title}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span className="material-symbols-outlined text-4xl text-white/20">article</span>
+                        )}
+                      </div>
+                      <div className="p-6 flex flex-col flex-grow relative z-20">
+                        <div className="flex items-center gap-3 text-xs font-body text-primary mb-3 uppercase tracking-wider font-bold">
+                          <span>{new Date(post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                        </div>
+                        <h4 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h4>
+                        <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
+                          {post.excerpt || post.content.substring(0, 150) + "..."}
+                        </p>
+                        {post.blog_categories && (
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-1 bg-surface rounded text-xs text-white">
+                              {/* @ts-ignore - Supabase nested join type */}
+                              {post.blog_categories.name}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </article>
+                  ))
+                ) : (
+                  <div className="col-span-1 md:col-span-2 py-12 text-center border border-dashed border-white/10 rounded-2xl">
+                    <span className="material-symbols-outlined text-4xl text-white/20 mb-2">article</span>
+                    <h4 className="font-heading text-xl text-white">No articles yet</h4>
+                    <p className="font-body text-on-surface-variant mt-2">Check back soon for new insights.</p>
                   </div>
-                  <div className="p-6 flex flex-col flex-grow relative z-20">
-                    <div className="flex items-center gap-3 text-xs font-body text-primary mb-3 uppercase tracking-wider font-bold">
-                      <span>Sep 28, 2023</span>
-                      <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-                      <span>5 Min Read</span>
-                    </div>
-                    <h4 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                      Starting a Digital Printing Press in 2023
-                    </h4>
-                    <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
-                      From securing the right industrial equipment to
-                      understanding the local market demands for flex and offset
-                      printing, here is a behind-the-scenes look at United
-                      Digital.
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Entrepreneurship
-                      </span>
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Business
-                      </span>
-                    </div>
-                  </div>
-                </article>
-
-                {/* Article Card 2 */}
-                <article className="glass-panel rounded-2xl overflow-hidden group flex flex-col h-full border border-white/5 hover:border-white/20 transition-colors relative">
-                  <Link
-                    href="/blog/scaling-education-youtube"
-                    className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-                  ></Link>
-                  <div className="aspect-video relative overflow-hidden shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1598550476439-6847785fcea6?q=80&w=1974&auto=format&fit=crop"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      alt="Video Setup"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow relative z-20">
-                    <div className="flex items-center gap-3 text-xs font-body text-primary mb-3 uppercase tracking-wider font-bold">
-                      <span>Sep 15, 2023</span>
-                      <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-                      <span>10 Min Read</span>
-                    </div>
-                    <h4 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                      Scaling Education Through YouTube
-                    </h4>
-                    <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
-                      The traditional classroom has limits. Digital platforms do
-                      not. Discover the workflow, equipment, and mindset
-                      required to transition from a physical classroom to a
-                      digital educator.
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Creation
-                      </span>
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Tech
-                      </span>
-                    </div>
-                  </div>
-                </article>
-
-                {/* Article Card 3 */}
-                <article className="glass-panel rounded-2xl overflow-hidden group flex flex-col h-full border border-white/5 hover:border-white/20 transition-colors relative">
-                  <Link
-                    href="/blog/effective-teaching-strategies"
-                    className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-                  ></Link>
-                  <div className="aspect-video relative overflow-hidden shrink-0">
-                    <img
-                      src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      alt="Teaching"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow relative z-20">
-                    <div className="flex items-center gap-3 text-xs font-body text-primary mb-3 uppercase tracking-wider font-bold">
-                      <span>Aug 22, 2023</span>
-                      <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-                      <span>7 Min Read</span>
-                    </div>
-                    <h4 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                      The 3 Ds: My Core Teaching Philosophy
-                    </h4>
-                    <p className="font-body text-sm text-on-surface-variant leading-relaxed mb-6 line-clamp-3 flex-grow">
-                      Determination, Discipline, and Dedication. How these three
-                      pillars have shaped my decade-long career in government
-                      schools.
-                    </p>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Education
-                      </span>
-                      <span className="px-2 py-1 bg-surface rounded text-xs text-white">
-                        Mentorship
-                      </span>
-                    </div>
-                  </div>
-                </article>
+                )}
               </div>
-
-              {/* Load More Button */}
-              <div className="text-center pt-8">
-                <button className="px-8 py-3 glass-panel border border-white/10 text-white font-heading font-bold rounded-full hover:border-primary/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background">
-                  Load Older Posts
-                </button>
-              </div>
-            </div>
           </div>
 
           {/* Sidebar */}
@@ -191,50 +126,20 @@ export default function BlogPage() {
                 Categories
               </h3>
               <ul className="space-y-3 font-body text-sm">
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span>Education & Mentorship</span>
-                    <span className="bg-white/5 px-2 py-0.5 rounded text-xs">
-                      12
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span>Business & Printing</span>
-                    <span className="bg-white/5 px-2 py-0.5 rounded text-xs">
-                      8
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span>Content Creation</span>
-                    <span className="bg-white/5 px-2 py-0.5 rounded text-xs">
-                      15
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors"
-                  >
-                    <span>Personal Development</span>
-                    <span className="bg-white/5 px-2 py-0.5 rounded text-xs">
-                      5
-                    </span>
-                  </a>
-                </li>
+                {categories && categories.length > 0 ? (
+                  categories.map((category) => (
+                    <li key={category.id}>
+                      <Link
+                        href={`/blog?category=${category.slug}`}
+                        className="flex items-center justify-between text-on-surface-variant hover:text-primary transition-colors"
+                      >
+                        <span>{category.name}</span>
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li className="text-white/40 text-sm">No categories found.</li>
+                )}
               </ul>
             </div>
           </aside>

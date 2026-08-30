@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Gallery | Ram Saran Yadav",
@@ -7,8 +8,20 @@ export const metadata = {
     "Visual journey of Ram Saran Yadav across teaching, digital printing, and community building.",
 };
 
-export default function GalleryPage() {
-  return (
+export default async function GalleryPage() {
+  const supabase = await createClient();
+
+  // Fetch gallery items
+  const { data: galleryItems } = await supabase
+    .from("gallery_items")
+    .select("*, gallery_albums(name)")
+    .order("created_at", { ascending: false });
+
+  // Fetch albums
+  const { data: albums } = await supabase
+    .from("gallery_albums")
+    .select("*");
+
     <>
       {/* Header Section */}
       <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto text-center relative overflow-hidden">
@@ -47,36 +60,15 @@ export default function GalleryPage() {
               >
                 All
               </button>
-              <button
-                data-filter="teaching"
-                className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-              >
-                Teaching
-              </button>
-              <button
-                data-filter="school"
-                className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-              >
-                School
-              </button>
-              <button
-                data-filter="printing"
-                className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-              >
-                Printing
-              </button>
-              <button
-                data-filter="graphic-design"
-                className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-              >
-                Graphic Design
-              </button>
-              <button
-                data-filter="photography"
-                className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-              >
-                Photography
-              </button>
+              {albums && albums.length > 0 && albums.map((album) => (
+                <button
+                  key={album.id}
+                  data-filter={album.name.toLowerCase()}
+                  className="filter-btn glass-panel text-white px-5 py-2 rounded-full font-heading font-bold text-sm hover:bg-white/10 transition-all border border-white/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+                >
+                  {album.name}
+                </button>
+              ))}
             </div>
           </div>
         </div>
@@ -89,131 +81,38 @@ export default function GalleryPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           id="gallery-grid"
         >
-          {/* Gallery Item 1 */}
-          <div className="masonry-item" data-category="teaching school">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_1.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Inspiring Students"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Teaching
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Inspiring Students
-                </h4>
+          {galleryItems && galleryItems.length > 0 ? (
+            galleryItems.map((item) => (
+              <div key={item.id} className="masonry-item" data-category={item.gallery_albums ? (item.gallery_albums as any).name.toLowerCase() : 'all'}>
+                <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
+                  <img
+                    src={item.image_url}
+                    className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
+                    alt={item.title}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    {item.gallery_albums && (
+                      <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
+                        {/* @ts-ignore */}
+                        {(item.gallery_albums as any).name}
+                      </span>
+                    )}
+                    <h4 className="font-heading font-bold text-white text-lg">
+                      {item.title}
+                    </h4>
+                  </div>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-1 md:col-span-2 lg:col-span-3 py-12 text-center border border-dashed border-white/10 rounded-2xl">
+              <span className="material-symbols-outlined text-4xl text-white/20 mb-2">photo_library</span>
+              <h4 className="font-heading text-xl text-white">No photos yet</h4>
+              <p className="font-body text-on-surface-variant mt-2">Gallery will be updated soon.</p>
             </div>
-          </div>
-
-          {/* Gallery Item 2 */}
-          <div className="masonry-item" data-category="printing graphic-design">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_2.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Industrial Print Setup"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Printing
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Industrial Print Setup
-                </h4>
-              </div>
-            </div>
-          </div>
-
-          {/* Gallery Item 3 */}
-          <div className="masonry-item" data-category="studio photography">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_3.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Content Creation Studio"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Studio
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Content Creation Studio
-                </h4>
-              </div>
-            </div>
-          </div>
-
-          {/* Gallery Item 4 */}
-          <div className="masonry-item" data-category="teaching events">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_4.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Annual Function"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Events
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Annual Function
-                </h4>
-              </div>
-            </div>
-          </div>
-
-          {/* Gallery Item 5 */}
-          <div className="masonry-item" data-category="printing">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_5.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Offset Printing Machine"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Printing
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Offset Printing Machine
-                </h4>
-              </div>
-            </div>
-          </div>
-
-          {/* Gallery Item 6 */}
-          <div className="masonry-item" data-category="awards community">
-            <div className="relative group rounded-2xl overflow-hidden cursor-pointer">
-              <img
-                src="/assets/img/gallery/gallery_6.jpg"
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Community Award"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="bg-primary/90 text-white font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full inline-block w-max mb-2">
-                  Awards
-                </span>
-                <h4 className="font-heading font-bold text-white text-lg">
-                  Community Award
-                </h4>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
 
         {/* Load More Button */}
