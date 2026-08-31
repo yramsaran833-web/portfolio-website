@@ -8,19 +8,31 @@ export const metadata = {
     "Download study materials, grammar notes, assignments, and past question papers provided by Ram Saran Yadav.",
 };
 
-export default async function ResourcesPage() {
+export default async function ResourcesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
   const supabase = await createClient();
-
-  // Fetch resources
-  const { data: resources } = await supabase
-    .from("resources")
-    .select("*, resource_categories(name)")
-    .order("created_at", { ascending: false });
+  const resolvedParams = await searchParams;
+  const categoryId = resolvedParams.category as string;
 
   // Fetch categories
   const { data: categories } = await supabase
     .from("resource_categories")
     .select("*");
+
+  // Fetch resources
+  let query = supabase
+    .from("resources")
+    .select("*, resource_categories(name)")
+    .order("created_at", { ascending: false });
+
+  if (categoryId) {
+    query = query.eq('category_id', categoryId);
+  }
+
+  const { data: resources } = await query;
 
   return (
     <>
@@ -67,16 +79,28 @@ export default async function ResourcesPage() {
               </h3>
               <ul className="space-y-2">
                 <li>
-                  <button className="w-full text-left bg-primary/20 text-white font-bold px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
-                    All Subjects
-                  </button>
+                  <Link href="/resources" scroll={false}>
+                    <button className={`w-full text-left px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center ${
+                      !categoryId 
+                        ? 'bg-primary/20 text-white font-bold' 
+                        : 'hover:bg-white/5 text-on-surface-variant hover:text-white'
+                    }`}>
+                      All Subjects
+                    </button>
+                  </Link>
                 </li>
                 {categories && categories.length > 0 ? (
                   categories.map((category) => (
                     <li key={category.id}>
-                      <button className="w-full text-left hover:bg-white/5 text-on-surface-variant hover:text-white px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center">
-                        {category.name}
-                      </button>
+                      <Link href={`/resources?category=${category.id}`} scroll={false}>
+                        <button className={`w-full text-left px-4 py-2.5 rounded-lg transition-colors flex justify-between items-center ${
+                          categoryId === category.id 
+                            ? 'bg-primary/20 text-white font-bold' 
+                            : 'hover:bg-white/5 text-on-surface-variant hover:text-white'
+                        }`}>
+                          {category.name}
+                        </button>
+                      </Link>
                     </li>
                   ))
                 ) : (
@@ -160,8 +184,8 @@ export default async function ResourcesPage() {
               ) : (
                 <div className="col-span-1 md:col-span-2 py-12 text-center border border-dashed border-white/10 rounded-2xl">
                   <span className="material-symbols-outlined text-4xl text-white/20 mb-2">folder_open</span>
-                  <h4 className="font-heading text-xl text-white">No resources yet</h4>
-                  <p className="font-body text-on-surface-variant mt-2">Study materials will be uploaded soon.</p>
+                  <h4 className="font-heading text-xl text-white">No resources found</h4>
+                  <p className="font-body text-on-surface-variant mt-2">Try selecting a different category.</p>
                 </div>
               )}
             </div>
