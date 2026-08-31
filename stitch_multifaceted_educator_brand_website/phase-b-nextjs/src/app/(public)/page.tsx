@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CounterAnimation from "@/components/ui/CounterAnimation";
 import HeroAnimation from "@/components/home/HeroAnimation";
+import VideoPlayer from "@/components/home/VideoPlayer";
 import TestimonialSlider from "@/components/home/TestimonialSlider";
 import { createClient } from "@/lib/supabase/server";
 
@@ -197,34 +198,7 @@ export default async function Home() {
           className="w-full max-w-6xl mx-auto animate-on-scroll"
           style={{ transitionDelay: "200ms" }}
         >
-          {/* Note: In React, we usually use state to load an iframe onClick instead of innerHTML.
-              For simplicity and exact matching of Phase A functionality, we use a simple approach. */}
-          <div className="relative w-full aspect-video bg-surface rounded-[2rem] border border-white/10 overflow-hidden shadow-[0_0_60px_rgba(255,122,0,0.15)] group cursor-pointer">
-            <Image
-              src="/assets/img/bio-thumbnail.png"
-              alt="Ram Saran Yadav Biography"
-              fill
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-            />
-            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500"></div>
-            
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 md:w-32 md:h-32 bg-primary/90 backdrop-blur-sm text-white rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(255,122,0,0.6)] group-hover:scale-110 group-hover:bg-primary transition-all duration-500 ring-4 ring-white/20">
-                <span className="material-symbols-outlined text-6xl md:text-8xl ml-2 md:ml-4">
-                  play_arrow
-                </span>
-              </div>
-            </div>
-            
-            <a
-              href="https://drive.google.com/file/d/1Tg1as0_ld3r7OVJ4IFMbGXFjo4U3s9Bl/view"
-              target="_blank"
-              rel="noreferrer"
-              className="absolute inset-0 z-10"
-              aria-label="Play biography video"
-            ></a>
-          </div>
+          <VideoPlayer />
         </div>
       </section>
 
