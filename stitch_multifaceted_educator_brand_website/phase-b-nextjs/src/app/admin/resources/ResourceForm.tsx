@@ -3,7 +3,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { resourceSchema, type ResourceFormValues } from '@/lib/validations/resources'
-import { createResource, updateResource, uploadResourceFile } from './actions'
+import { createResource, updateResource } from './actions'
+import { createClient } from '@/lib/supabase/client'
 import { Loader2, File as FileIcon } from 'lucide-react'
 import Link from 'next/link'
 
@@ -35,19 +36,36 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
     const file = e.target.files?.[0]
     if (!file) return
 
+    if (file.size > 20 * 1024 * 1024) {
+      alert("File size exceeds 20MB limit.")
+      return
+    }
+
     setUploading(true)
-    const formData = new FormData()
-    formData.append('file', file)
+    
+    try {
+      const supabase = createClient()
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
 
-    const res = await uploadResourceFile(formData)
-    setUploading(false)
+      const { data, error } = await supabase.storage.from('resources').upload(fileName, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
 
-    if (res.error) {
-      alert(res.error)
-    } else if (res.url) {
-      setFileUrlPreview(res.url)
-      form.setValue('file_url', res.url)
-      form.clearErrors('file_url')
+      if (error) {
+        alert(error.message)
+      } else if (data) {
+        const { data: publicUrlData } = supabase.storage.from('resources').getPublicUrl(data.path)
+        setFileUrlPreview(publicUrlData.publicUrl)
+        form.setValue('file_url', publicUrlData.publicUrl)
+        form.clearErrors('file_url')
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Upload failed. Please try again.")
+    } finally {
+      setUploading(false)
     }
   }
 
@@ -92,7 +110,7 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
                 </label>
                 <label className="flex items-center gap-2 text-white cursor-pointer">
                   <input type="radio" value="youtube" {...form.register('resource_type')} className="text-primary" />
-                  YouTube URL
+                  Video URL
                 </label>
               </div>
 
@@ -126,11 +144,11 @@ export function ResourceForm({ initialData, categories }: ResourceFormProps) {
                 </>
               ) : (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-300">YouTube Video URL</label>
+                  <label className="text-sm font-medium text-gray-300">Video URL (YouTube or Facebook)</label>
                   <input 
                     type="url" 
                     {...form.register('file_url')} 
-                    placeholder="https://youtube.com/watch?v=..."
+                    placeholder="https://youtube.com/... or https://facebook.com/..."
                     className="w-full bg-[#0a0f1d] border border-gray-800 rounded-md py-2 px-3 text-white focus:outline-none focus:border-[#d4af37]" 
                   />
                   {form.formState.errors.file_url && <p className="text-xs text-red-500">{form.formState.errors.file_url.message as string}</p>}
