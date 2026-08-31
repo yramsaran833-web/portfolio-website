@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { Analytics } from "@vercel/analytics/react";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -32,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col" style={{ cursor: 'auto' }}>
         <ScrollReveal />
         {children}
+        <Analytics />
       </body>
     </html>
   );
