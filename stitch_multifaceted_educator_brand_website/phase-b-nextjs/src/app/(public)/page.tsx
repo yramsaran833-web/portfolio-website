@@ -23,6 +23,13 @@ export default async function Home() {
     .order("sort_order", { ascending: true })
     .order("created_at", { ascending: false });
 
+  // Fetch latest 4 gallery items
+  const { data: galleryItems } = await supabase
+    .from("gallery_items")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(4);
+
   return (
     <>
       {/* MODULE: Premium Hero (Scroll Jacking) */}
@@ -223,42 +230,38 @@ export default async function Home() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 animate-on-scroll">
-          <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative">
-            <Image
-              src="/assets/img/gallery/gallery_1.jpg"
-              alt="Gallery Image 1"
-              fill
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative">
-            <Image
-              src="/assets/img/gallery/gallery_2.jpg"
-              alt="Gallery Image 2"
-              fill
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative md:-translate-y-6">
-            <Image
-              src="/assets/img/gallery/gallery_3.jpg"
-              alt="Gallery Image 3"
-              fill
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
-          <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative md:translate-y-6">
-            <Image
-              src="/assets/img/gallery/gallery_4.jpg"
-              alt="Gallery Image 4"
-              fill
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          </div>
+          {galleryItems && galleryItems.length > 0 ? (
+            galleryItems.map((item, index) => (
+              <div key={item.id} className={`aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative ${index % 2 === 1 ? 'md:-translate-y-6' : 'md:translate-y-6'}`}>
+                <Image
+                  src={item.image_url}
+                  alt={item.title || `Gallery Image ${index + 1}`}
+                  fill
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+            ))
+          ) : (
+            <>
+              <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative">
+                <Image src="/assets/img/gallery/gallery_1.jpg" alt="Gallery Image 1" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative">
+                <Image src="/assets/img/gallery/gallery_2.jpg" alt="Gallery Image 2" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative md:-translate-y-6">
+                <Image src="/assets/img/gallery/gallery_3.jpg" alt="Gallery Image 3" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+              <div className="aspect-square rounded-2xl overflow-hidden group border border-white/10 shadow-lg relative md:translate-y-6">
+                <Image src="/assets/img/gallery/gallery_4.jpg" alt="Gallery Image 4" fill className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
