@@ -60,6 +60,25 @@ export async function createPrintingProject(data: PrintingProjectFormValues) {
   return { success: true }
 }
 
+export async function bulkCreatePrintingProjects(projects: PrintingProjectFormValues[]) {
+  const supabase = await createClient()
+  
+  const { data: user, error: authError } = await supabase.auth.getUser()
+  if (authError || !user?.user) {
+    return { error: 'Unauthorized' }
+  }
+
+  const { error } = await supabase.from('printing_projects').insert(projects)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/admin/printing')
+  revalidatePath('/printing')
+  return { success: true }
+}
+
 export async function updatePrintingProject(id: string, data: PrintingProjectFormValues) {
   const supabase = await createClient()
   
