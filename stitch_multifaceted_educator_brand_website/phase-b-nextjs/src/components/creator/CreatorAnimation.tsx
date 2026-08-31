@@ -14,7 +14,7 @@ export default function CreatorAnimation() {
     const context = canvas.getContext("2d");
     if (!context) return;
 
-    const frameCount = 96;
+    const frameCount = 95;
     const currentFrame = (index: number) =>
       `/Final_Crator/Content_${index.toString().padStart(3, "0")}.jpg`;
 
