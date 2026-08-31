@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 import { Analytics } from "@vercel/analytics/react";
+import VisitorTracker from "@/components/layout/VisitorTracker";
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col" style={{ cursor: 'auto' }}>
+        <VisitorTracker />
         <ScrollReveal />
         {children}
         <Analytics />

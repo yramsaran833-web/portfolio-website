@@ -1,23 +1,42 @@
-﻿import { 
+import { 
   FileText, 
   Image as ImageIcon, 
   Award, 
-  MessageSquare 
+  MessageSquare,
+  Users
 } from 'lucide-react';
+import { createClient } from '@/lib/supabase/server';
 
-const stats = [
-  { name: 'Total Posts', value: '12', icon: FileText },
-  { name: 'Gallery Items', value: '45', icon: ImageIcon },
-  { name: 'Awards', value: '8', icon: Award },
-  { name: 'Messages', value: '3', icon: MessageSquare },
-];
+export default async function AdminDashboard() {
+  const supabase = await createClient();
 
-export default function AdminDashboard() {
+  const [
+    { count: blogCount },
+    { count: galleryCount },
+    { count: awardsCount },
+    { count: messagesCount },
+    { data: siteStats }
+  ] = await Promise.all([
+    supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
+    supabase.from('gallery').select('*', { count: 'exact', head: true }),
+    supabase.from('awards').select('*', { count: 'exact', head: true }),
+    supabase.from('messages').select('*', { count: 'exact', head: true }),
+    supabase.from('site_stats').select('total_views').eq('id', 1).single()
+  ]);
+
+  const stats = [
+    { name: 'Total Visitors', value: siteStats?.total_views?.toString() || '0', icon: Users },
+    { name: 'Total Posts', value: blogCount?.toString() || '0', icon: FileText },
+    { name: 'Gallery Items', value: galleryCount?.toString() || '0', icon: ImageIcon },
+    { name: 'Awards', value: awardsCount?.toString() || '0', icon: Award },
+    { name: 'Messages', value: messagesCount?.toString() || '0', icon: MessageSquare },
+  ];
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-white">Dashboard Overview</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
@@ -36,7 +55,7 @@ export default function AdminDashboard() {
 
       <div className="bg-[#050812] border border-gray-800 rounded-lg p-6 min-h-[300px]">
         <h3 className="text-lg font-medium text-white mb-4">Recent Activity</h3>
-        <p className="text-sm text-gray-400">Activity stream will be displayed here...</p>
+        <p className="text-sm text-gray-400">Welcome to your new admin dashboard! Start managing your content from the sidebar.</p>
       </div>
     </div>
   );
