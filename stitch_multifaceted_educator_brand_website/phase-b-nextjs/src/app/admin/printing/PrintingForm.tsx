@@ -32,7 +32,7 @@ export function PrintingForm({ initialData }: PrintingFormProps) {
     defaultValues: {
       title: initialData?.title || 'Printing Press Work',
       description: initialData?.description || '',
-      image_url: initialData?.image_url || 'pending', // placeholder for validation
+      image_url: initialData?.image_url || 'https://pending.com', // valid URL to bypass zod before submit
       sort_order: initialData?.sort_order || 0,
       status: initialData?.status || 'published',
     },
