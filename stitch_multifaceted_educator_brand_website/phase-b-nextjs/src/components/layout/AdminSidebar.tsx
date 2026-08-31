@@ -13,7 +13,8 @@ import {
   Calendar,
   FolderDown, 
   Settings,
-  LogOut
+  LogOut,
+  Printer
 } from 'lucide-react';
 import { logoutAction } from '@/app/login/actions';
 
@@ -21,6 +22,7 @@ const navItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Blog', href: '/admin/blog', icon: FileText },
   { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
+  { name: 'Printing', href: '/admin/printing', icon: Printer },
   { name: 'Awards', href: '/admin/awards', icon: Award },
   { name: 'Testimonials', href: '/admin/testimonials', icon: Quote },
   { name: 'Resources', href: '/admin/resources', icon: FolderDown },

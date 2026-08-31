@@ -508,6 +508,49 @@ export default async function PrintingPage() {
         </div>
       </section>
 
+      {/* Our Recent Work / Printing Projects */}
+      {projects && projects.length > 0 && (
+        <section className="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-white/5">
+          <div className="text-center mb-16 animate-on-scroll">
+            <h2 className="font-heading text-sm text-primary uppercase tracking-widest font-bold mb-2">
+              Portfolio
+            </h2>
+            <h3 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+              Our Recent <span className="text-primary">Work</span>
+            </h3>
+            <p className="font-body text-on-surface-variant max-w-2xl mx-auto text-lg">
+              Take a look at some of the high-quality prints and projects we have delivered to our happy clients.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <div 
+                key={project.id} 
+                className="group relative rounded-2xl overflow-hidden glass-panel border border-white/10 aspect-[4/3] animate-on-scroll"
+                style={{ transitionDelay: `${(index % 3) * 100}ms` }}
+              >
+                <img
+                  src={project.image_url}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                  <h4 className="font-heading font-bold text-white text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                    {project.title}
+                  </h4>
+                  {project.description && (
+                    <p className="font-body text-white/80 text-sm mt-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75 line-clamp-2">
+                      {project.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Quote / Contact Section */}
       <section
         id="quote-form"
