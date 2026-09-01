@@ -18,9 +18,9 @@ export default async function AdminDashboard() {
     { data: siteStats }
   ] = await Promise.all([
     supabase.from('blog_posts').select('*', { count: 'exact', head: true }),
-    supabase.from('gallery').select('*', { count: 'exact', head: true }),
+    supabase.from('gallery_items').select('*', { count: 'exact', head: true }),
     supabase.from('awards').select('*', { count: 'exact', head: true }),
-    supabase.from('messages').select('*', { count: 'exact', head: true }),
+    supabase.from('contact_messages').select('*', { count: 'exact', head: true }),
     supabase.from('site_stats').select('total_views').eq('id', 1).single()
   ]);
 
